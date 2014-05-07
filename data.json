@@ -1,0 +1,235 @@
+{
+	"majors" : 
+		[ 
+			{"name" : "Computer Science", "id" : "CS"},
+			{ "name" : "Electrical Engineering", "id" : "EE"}
+		],
+	
+	"Computer Science" : { 
+      "tracks" : [
+      	{
+      		"name":"Artifical Intelligence",
+      		"id":"AI"
+      	},{
+      		"name":"Biocomputation",
+      		"id":"BIO"
+      	},{
+      		"name":"Graphics",
+      		"id":"GR"
+      	},{
+      		"name":"Human Computer Interaction",
+      		"id":"HCI"
+      	},{
+      		"name":"Information",
+      		"id":"info"
+      	},{
+      		"name":"Systems",
+      		"id":"SYS"
+      	},{
+      		"name":"Theory", 
+      		"id":"TY"
+      	},{
+      		"name":"Unspecialized",
+      		"id":"UN"
+      	}
+      	]
+    },
+
+    "Requirement_Map" : {
+    	"Math" : "Math",
+    	"Science" : "Science",
+    	"Technology in Society" : "TIS",
+    	"Engineering Fundamental" : "ENGRFUND",
+    	"Writing in the Major" : "WIM",
+    	"Core" : "Core",
+    	"Specialization" : "Specialization",
+    	"Senior Project" : "Senior"
+    },
+    
+    "Electrical Engineering" : {
+      "tracks" : ["Computer Software", "Signals and Systems", "Circuits"]
+    },
+
+    "classes" : [1,2,3,4,5,6,7,9,10],
+  
+  	"requirements" : {
+  		"University" : {
+  			"2014" : {
+	  				"Buffer" : [
+		  			{
+		  				"name" : "IHUM",
+		  				"classes" : ["IHUM1","IHUM2", "IHUM3"],
+		  				"electives" : "",
+		  				"about" : ""
+		  			},
+		  			{
+		  				"name" : "Writing & Rhetoric",
+		  				"classes" : ["PWR1","PWR2", "SLE"],
+		  				"electives" : "",
+		  				"about" : ""
+		  			},
+		  			{
+		  				"name" : "Discplinary Breadth",
+		  				"classes" : ["NatSci", "ENGR","Hum","SocSci","Math"],
+		  				"electives" : "",
+		  				"about" : ""
+		  			},
+		  			{
+		  				"name" : "Education for Citizenship",
+		  				"classes" : ["Gender","GlobalComm","EthicReas","AmerCultur"],
+		  				"electives" : "",
+		  				"about" : ""
+		  			}
+	  			]
+	  		},
+	  		"2015" : {
+	  				"Buffer" : [
+		  			{
+		  				"name" : "IHUM",
+		  				"classes" : ["IHUM1","IHUM2", "IHUM3"],
+		  				"electives" : "",
+		  				"about" : ""
+		  			},
+		  			{
+		  				"name" : "Writing & Rhetoric",
+		  				"classes" : ["PWR1","PWR2", "SLE"],
+		  				"electives" : "",
+		  				"about" : ""
+		  			},
+		  			{
+		  				"name" : "Discplinary Breadth",
+		  				"classes" : ["NatSci", "ENGR","Hum","SocSci","Math"],
+		  				"electives" : "",
+		  				"about" : ""
+		  			},
+		  			{
+		  				"name" : "Education for Citizenship",
+		  				"classes" : ["Gender","GlobalComm","EthicReas","AmerCultur"],
+		  				"electives" : "",
+		  				"about" : ""
+		  			}
+	  			]
+	  		},
+	  		"2016" : {
+	  				"Buffer" : [
+		  			{
+		  				"name" : "IHUM",
+		  				"classes" : ["IHUM1","IHUM2", "IHUM3"],
+		  				"electives" : "",
+		  				"about" : ""
+		  			},
+		  			{
+		  				"name" : "Writing & Rhetoric",
+		  				"classes" : ["PWR1","PWR2", "SLE"],
+		  				"electives" : "",
+		  				"about" : ""
+		  			},
+		  			{
+		  				"name" : "Discplinary Breadth",
+		  				"classes" : ["NatSci", "ENGR","Hum","SocSci","Math"],
+		  				"electives" : "",
+		  				"about" : ""
+		  			},
+		  			{
+		  				"name" : "Education for Citizenship",
+		  				"classes" : ["Gender","GlobalComm","EthicReas","AmerCultur"],
+		  				"electives" : "",
+		  				"about" : ""
+		  			}
+	  			]
+	  		},
+	  		"2017" : {
+	  				"Buffer" : [
+		  			{
+		  				"name" : "Thinking Matters",
+		  				"classes" : ["THINK1"],
+		  				"electives" : "",
+		  				"about" : ""
+		  			},
+		  			{
+		  				"name" : "Writing & Rhetoric",
+		  				"classes" : ["PWR1","PWR2", "SLE", "SIMILE", "ITALIC", "ESF"],
+		  				"electives" : "",
+		  				"about" : ""
+		  			},
+		  			{
+		  				"name" : "Ways of Doing",
+		  				"classes" : ["WAY-All", "WAY-ALL2","WAY-AQR","WAY-CE","WAY-ED","WAY-ER", "WAY-FR", "WAY-SI", "WAY-SI2", "WAY-SMA", "WAY-SMA2"],
+		  				"electives" : "",
+		  				"about" : ""
+		  			}
+	  			]
+	  		}
+	  	},
+  		"Major" : {
+  			"2014" : {
+  				"Categories" : ["Math","Science","Technology in Society","Engineering Fundamental","Writing in the Major", "Core", "Specialization", "Senior Project"],
+  				"Computer Science" : [
+		  			{
+		  				"name" : "Math",
+		  				"classes" : ["MATH41","MATH42","CS103","CS109"],
+		  				"electives" : ["MATH51", "MATH103", "MATH104", "MATH108", "MATH109", "MATH110", "MATH113", "CS157", "CS205A", "Phil 151", "CME100", "CME102", "CME104"],
+		  				"about" : "Mathematics (26 units minimum) MATH 19, 20 and 21 may be taken instead of MATH 41 and 42, as long as at least 26 math units are taken. Restrictions: Math 51 and Math 103, or Math 103 and Math 113, or CS 157 and Phil 151, may not be used in combination to satisfy the Math electives requirement. Students who have taken both Math 51 and 52 may not count CME 100 as an elective.",
+		  				"miniDescription" : "26 Units Required",
+		  				"unitsRequired" : 26
+		  			},{
+						"name" : "Science",
+						"classes" : ["PHYSICS41", "PHYSICS43"],
+						"electives" : ["BIO41","BIO42","BIO43","CEE63","CEE64","CEE64","CEE70","CHEM31A","CHEM31B","CHEM31X","CHEM33","CHEM35","CHEM36","CHEM131","CHEM135","EARTHSYS10","ENGR31","GES1A","GES1B","GES1C","PHYSICS21","PHYSICS23","PHYSICS23","PHYSICS25","PHYSICS41","PHYSICS43","PHYSICS45","PHYSICS42","PHYSICS44","PHYSICS46","PHYSICS61","PHYSICS63","PHYSICS63","PHYSICS62","PHYSICS64","PHYSICS67"],
+						"about" : "11 Units minimum.  Any course of 3 or more units from the School of Engineering list of “PSYCH 30; PSYCH 55, or AP Chemistry credit may also be used. Either of the physics sequences 61/63 or 21/23 may be substituted for 41/43 as long as at least 11 science units are taken.",
+						"miniDescription" : "11 Units Required",
+						"unitsRequired" : 11
+					},{ 
+						"name" : "Technology in Society",
+						"classes" : ["STS101","STS201","ENGR130","STS101Q","STS110","MS&E197","STS112","STS115","STS180","COMM120","COMM220","COMM169","CS181","CS181W","ENGR145","HUMBIO174","MS&E181", "MS&E193","PUBLPOL\n194"],
+						"electives" : "",
+						"about" : "One course, 3-5 units",
+						"miniDescription" : "One Course Required",
+						"unitsRequired" : "One Class"
+					},{  
+						"name" : "Engineering Fundamental",
+						"classes" : ["ENGR40","CS106B","CS106X"],
+						"electives" : ["ENGR10", "ENGR14", "ENGR15", "ENGR20", "CHEME20", "ENGR25B", "CHEME25B", "ENGR25E", "CHEME25E", "ENGR30", "ENGR40", "ENGR50", "ENGR50E", "ENGR60", "ENGR62", "MS&E111", "ENGR70A",  "CS106A", "ENGR70B", "CS106B", "ENGR70X", "CS106X", "ENGR80"],
+						"about" : "CS106B or CS106X 13 units minimum Only one of the ENGR 50 courses may be applied toward the Engineering Fundamentals requirement.Only one of the ENGR 70/CS 106 courses may be counted toward the Engineering Fundamentals requirement. Refer to your department’s major requirements in Chapter 5.",
+						"miniDescription" : "13 Units Required",
+						"unitsRequired" : 13
+					},{
+						"name" : "Writing in the Major",
+						"classes" : ["CS181W","CS191W","CS194W","CS210B", "CS294W"],
+						"electives" : [],
+						"about" : "One course required",
+						"miniDescription" : "One Course Required",
+						"unitsRequired" : "One Class"
+					},{
+						"name" : "Core",
+						"classes" : ["CS107","CS110", "CS161"],
+						"electives" : [],
+						"about" : "14 Units. Must complete all classes.",
+						"miniDescription" : "Core Classes Required",
+						"unitsRequired" : 14
+					},{
+						"name" : "Senior Project",
+						"classes" : ["CS191","CS191W","CS194","CS194W","CS210B","CS294","CS294W"],
+						"electives" : [],
+						"about" : "One class required.",
+						"miniDescription" : "One Class Required",
+						"unitsRequired" : "One Class"
+					},{
+						"name" : "Specialization",
+						"electives" : ["CS108","CS121","CS221","CS124","CS140","CS142","CS143","CS144","CS145","CS147","CS148","CS149","CS154", "CS155", "CS156", "CS157","PHIL151","CS164","CS205A", "CS205B", "CS210A","CS222", "CS223A", "CS223B", "CS224M", "CS224N", "CS224S", "CS224U", "CS224W", "CS225A", "CS225B", "CS226", "CS227", "CS228", "CS228T", "CS229", "CS240", "CS241", "CS242", "CS243", "CS244", "CS244B", "CS245", "CS246", "CS247", "CS248", "CS249A", "CS249B", "CS255", "CS254", "CS256", "CS257", "CS258", "CS261", "CS262", "CS270", "CS271", "CS272", "CS273A", "CS274", "CS276", "CS277", "CS295", "CME108", "EE108B", "EE282"],
+						"miniDescription" : "Minimum of 7 courses (26 units minimum required)",
+						"unitsRequired" : 26,
+						"specializations" : {
+							"Artificial Intelligence" : {
+								"classes" : ["CS221","CS223A","CS223B","CS224M","CS224N","CS226","CS227","CS228","CS229","CS124","CS205A","CS222","CS224S","CS224U","CS224W","CS225A","CS227B","CS262","CS276","CS277","CS279","CS321","CS323","CS326A","CS327A","CS329","CS374","CS379","EE263","EE376A","ENGR205","ENGR209A","MS&E251","MS&E339","MS&E351","STAT315A","STAT315B","CS275","CS278","EE364A","EE364B","ECON286","MS&E252","MS&E352","MS&E355","PHIL152","PSYCH202","PSCY204A","PSYC204B","STAT200","STAT202","STAT205"],
+								"about" : "a) CS 221 b) Any two of: CS 223A, 223B, 224M, 224N, 226, 227, 228, 229 c) One additional course from category (b) or the following: CS 124, 205A, 222, 224S, 224U, 224W, 225A 225B, 227B, 262, 276, 277, 279, 321, 323, 326A, 327A, 329 (with advisor approval), 374, 379 (with advisor approval); EE 263, 376A; Eng 205, 209A; MS&E 251, 339, 351; Stat 315A, 315B d) Track Electives: At least three additional courses selected from (b), (c), the general CS electives list10, or the following: CS 275, 278; EE 364A, 364B; Econ 286; MS&E 252, 352, 355; Phil 152; Psych 202, 204A, 204B; Stat 200, 202, 205"
+							}
+
+						}
+
+					}
+				]
+			}
+		}
+  	}
+}

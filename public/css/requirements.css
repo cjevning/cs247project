@@ -1,0 +1,13 @@
+.fixedWidth {
+    width: 300px !important;
+}
+
+.center-class{
+	text-align: center;
+}
+
+.bottom{
+	position: absolute;
+	bottom: 5px;
+	left: 5px;
+}

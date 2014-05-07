@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <title>Project</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/bootstrap-theme.min.css" rel="stylesheet">
+    <link href="/css/jumbotron.css" rel="stylesheet">
+    <link href="/css/debug.css" rel="stylesheet">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="/js/bootstrap.js"></script>
+    <script src="/js/debugW.js"></script>
+
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+	<!-- this is a comment in HTML -->
+    <nav class="navbar navbar-default" role="navigation">
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">TrackStanford</a>
+      </div>
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          <li><a href="/home">Home</a></li>
+          <li><a href="/requirement/University">University</a></li>
+          <li><a href="/requirement/Major">Major</a></li>
+          <li><a href="/summary">Summary</a></li>
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+    </nav>
+
+
+
+
+
+	<div class="container">
+
+		<div class="jumbotron">
+  			<h1>Page in Progress</h1>
+		</div>
+
+  <div>
+    {{#each classes}}
+      <i class="fa fa-square-o fa-3x test" id="{{this}}"></i>
+    {{/each}}
+  </div>
+
+
+<div class="button">
+  {{#each classes}}
+    <button type="button" class="btn btn-default btn-md test" id="{{this}}">
+      <span class="glyphicon glyphicon-star test">{{this}}</span>
+    </button>
+  {{/each}}
+</div>
+
+<div class="button" class="overlay">
+  {{#each classes}}
+  <div>
+    <div>
+      <button type="button" class="btn btn-default btn-md class myButton" id="{{this}}" data-toggle="popover" data-placement="bottom" data-content="Testing popover">
+        {{this}}
+        <a class="btn">
+    <!--       <p type="button" class="btn btn-default" id="hoho2" data-container="body" data-google="popover" data-placement="right" data-content="This would have class data.">
+     -->        <i class="fa fa-plus-square-o fa-2x"></i>
+    <!--       </p>
+     -->    </a>
+      </button>
+    </div>
+
+    <div>
+      <button type="button" class="btn btn-default btn-md">
+        Test
+      </butotn>
+    </div>
+  </div>
+
+  {{/each}}
+</div>
+
+<div>
+  <p type="button" class="btn btn-default" id="hoho" data-container="body" data-google="popover" data-placement="right" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
+  Popover on right
+  </p>
+</div>
+
+
+
+<!-- Button trigger modal -->
+<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+  Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+    <p><a href="/index">Back &raquo;</a></p>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="/js/bootstrap.min.js"></script>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-48686639-1', 'planstanford.herokuapp.com');
+      ga('send', 'pageview');
+
+    </script>
+
+  </body>
+</html>

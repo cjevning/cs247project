@@ -1,0 +1,96 @@
+<!doctype html>
+
+<html>
+<head>
+	<title>PlanStanford-Home</title>	
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/css/bootstrap-theme.min.css" rel="stylesheet">
+	<link href="/css/jumbotron.css" rel="stylesheet">
+	<link href="/css/home.css" rel="stylesheet">
+	<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+
+    <script src="https://code.jquery.com/jquery.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+	<script src="/js/homeW.js"></script> 
+</head>
+<body>
+    {{>navbar}}
+
+	<div class="container">
+		<div class="page-header">
+	      <h1>PlanStanford
+	         	<br/>
+	         	<small>
+	         		Keep track of the classes you've taken!
+		          	{{#if username}}
+		          		<br/>
+						Welcome {{username}}!
+					{{/if}}
+				</small>          
+	      </h1>
+	    </div>
+
+		<!-- <h3>University Requirements</h3> -->
+		<label for="trackfield">Select Class Year</label>
+		<form class="form" id="class_year_page" action='class_major_track' method="get" role="form">
+			<select class="uni-year-control form-control" id="classfield" name="classfield">
+				<option id="none" value="0" selected="sel">-- Select Class Year --</option>
+			    <option id="uni-2011" value="2011">2011</option>
+			    <option id="uni-2012" value="2012">2012</option>
+			    <option id="uni-2013" value="2013">2013</option>
+			    <option id="uni-2014" value="2014">2014</option>    
+			</select>
+
+			<label for="programfield">Select Program Sheet Year
+			<a href="ughb.stanford.edu">(learn more)</a></label>
+			<select class="prog-year-control form-control" id="programfield" name="programyear">
+				<option id="none" value ="0" selected="sel">-- Select Program Year --</option>
+			    <option id="prog-2011" value="2011">2011</option>
+			    <option id="prog-2012" value="2012">2012</option>
+			    <option id="prog-2013" value="2013">2013</option>
+			    <option id="prog-2014" value="2014">2014</option>    
+			</select>
+
+			<!-- <h3>Major Requirements</h3> -->
+			<label for="majorfield">Select Major (EE not yet implemented) </label>
+			<select  disabled class="maj-control form-control", id="majorfield" name="majorfield">
+				<option id="none" value ="0" selected="sel">-- Select Major --</option>
+				{{#each data.majors}}
+					<option id="maj-{{this.id}}" value="{{this.name}}-{{this.id}}">{{this.name}}</option>
+				{{/each}}
+			</select>
+
+			<label for="trackfield">Select Concentration</label>
+			<select disabled class="track-control form-control", id="trackfield" name="trackfield">
+				<option id="none" value ="0" selected="sel">-- Select Track --</option>
+			</select>
+			<h4 style="text-align:center;">Choose where to begin!</h4>
+			<div class="row">
+	            <div class="col-xs-6" style="text-align:center;">
+
+					<button disabled type="submit" id="classButton" class="btn btn-primary fixedWidth" name="Choice_Button" value="University">University<br/> Requirements</button>
+				</div>
+				
+				<div class="col-xs-6" style="text-align:center;">
+
+					<button disabled type="submit" id="majorButton" class="btn btn-primary fixedWidth" name="Choice_Button" value="Major">Major<br/>Requirements</button>
+				</div>
+			</div>
+		</form>
+		<br/><br/>	
+	</div>
+	<script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-48686639-1', 'planstanford.herokuapp.com');
+	  ga('send', 'pageview');
+
+	</script>
+
+</body>
+</html>

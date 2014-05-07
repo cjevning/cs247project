@@ -1,0 +1,11 @@
+.fixedWidth {
+    width: 120px;
+    height: 100px;
+}
+
+hr {
+     border: none;
+     height: 2px;
+     color: #333;
+     background-color: #333;
+}

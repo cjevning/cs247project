@@ -1,0 +1,78 @@
+<!doctype html>
+
+<html>
+<head>
+	<title>HCI Project Portfolio</title>	
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/css/bootstrap-theme.min.css" rel="stylesheet">
+	<link href="/css/requirements.css" rel="stylesheet">
+	<link href="/css/jumbotron.css" rel="stylesheet">
+
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery.js"></script>
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script src="/js/bootstrap.min.js"></script>
+  <script src="/js/summaryW.js"></script>
+  <script src="js/Chart.js"></script>
+  <script type='text/javascript' src='https://www.google.com/jsapi'></script>
+
+	<script type='text/javascript'>
+      google.load('visualization', '1', {packages:['table']});
+      google.setOnLoadCallback(drawTable);
+      function drawTable() {
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Requirement');
+        data.addColumn('number', 'Progress (%)');
+        data.addColumn('boolean', 'Status');
+        data.addRows([
+          // ['UNIVERSITY',  {v: 7000,  f: ''},  false],
+          ['IHum',                3/3 * 100, true],
+          ['Disc Breadth',        3/5*100,  false],
+          ['Educ 4 Citizenship',  2/2*100, true],
+          // ['MAJOR',  {v: 7000,  f: ''},  false],
+          ['Math',                4/5*100, true],
+          ['Science',             3/3*100, true],
+          ['TIS',                 1/1*100, true],
+          ['Engr Fund',                {v: 2/3*100, f: '66'}, true],
+          ['WIM',                 0/1*100, false],
+          ['Core',                3/3*100, true],
+          ['Specialty',           3/4*100, false],
+          ['Capstone',            0/1*100, true]
+
+        ]);
+
+        var table = new google.visualization.Table(document.getElementById('table_div'));
+        table.draw(data, {width: '300px'});
+      }
+    </script>
+  </head>
+
+
+<body>
+
+  {{>navbar}}
+
+
+	<div class="container">
+		<div class="jumbotron">
+			<h1 class ="center-class">Summary</h1>
+		</div>
+	</div>
+
+    <div id='table_div' style="height: 500px;"></div>
+
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-48686639-1', 'planstanford.herokuapp.com');
+      ga('send', 'pageview');
+
+    </script>
+
+</body>
+</html>

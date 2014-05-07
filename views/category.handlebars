@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Google Analytics Content Experiment code -->
+    <!--script>function utmx_section(){}function utmx(){}(function(){var
+    k='83042103-0',d=document,l=d.location,c=d.cookie;
+    if(l.search.indexOf('utm_expid='+k)>0)return;
+    function f(n){if(c){var i=c.indexOf(n+'=');if(i>-1){var j=c.
+    indexOf(';',i);return escape(c.substring(i+n.length+1,j<0?c.
+    length:j))}}}var x=f('__utmx'),xx=f('__utmxx'),h=l.hash;d.write(
+    '<sc'+'ript src="'+'http'+(l.protocol=='https:'?'s://ssl':
+    '://www')+'.google-analytics.com/ga_exp.js?'+'utmxkey='+k+
+    '&utmx='+(x?x:'')+'&utmxx='+(xx?xx:'')+'&utmxtime='+new Date().
+    valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
+    '" type="text/javascript" charset="utf-8"><\/sc'+'ript>')})();
+    </script><script>utmx('url','A/B');</script-->
+    <!-- End of Google Analytics Content Experiment code -->
+
+    <title>PlanStanford-Category</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/bootstrap-theme.min.css" rel="stylesheet">
+    <link href="/css/jumbotron.css" rel="stylesheet">
+    <link href="/css/icon_positioning.css" rel="stylesheet">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/categoryW.js"></script>
+  </head>
+
+  <body>
+    {{>navbar}}
+  
+  {{#if tabBoolean}}
+    
+
+    {{#if on_elective}}
+      <ul class="nav nav-tabs">
+        <li><a href="/requirement/{{requirement}}/{{category}}">Required</a></li>
+        <li class="active"><a href="#">Electives</a></li>
+      </ul>
+    {{else}}  
+      <ul class="nav nav-tabs">
+        <li class="active"><a href="#">Required</a></li>
+        <li><a href="./{{category}}/Electives">Electives</a></li>
+      </ul>
+    {{/if}}
+  
+    <div >
+      <h3 style="text-align:center;">{{requirement}} : {{category}} 
+          <button class="btn btn-default btn-xs" type="button"data-toggle="modal" data-target="#details-modal" id='details'>
+            <i class="fa fa-question"></i> Details
+          </button>
+          <br/>
+          <small>{{miniDescription}}</small>
+      </h3>
+      <hr/>
+    </div>
+
+  <!-- this is a comment in HTML -->
+  <div class="container">
+    <div class="details_button">
+      <!-- Modal -->
+      <div class="modal fade" id="details-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+              <h4 class="modal-title" id="myModalLabel">{{category}} Requirement Details</h4>
+            </div>
+            <div class="modal-body">
+              {{about}}
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="row">
+    {{#each classes}}
+      <div class="button">
+        <div class="col-xs-4">
+          <button type="button" class="btn btn-default btn-md class largeButton" id="{{this}}" data-toggle="modal" data-target="{{this}}-modal">
+            {{this}}
+          </button>
+          <br/>
+          <!-- Button trigger modal -->
+          <button class="btn btn-default thinButton info padding" data-toggle="modal" data-target="#{{this}}-modal" id='info-{{this}}'>
+            <i class="fa fa-info"></i> Info
+          </button>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="{{this}}-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel"></h4>
+              </div>
+              <div class="modal-body">
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    {{/each}}
+    </div>
+    <br/>
+    <br/>
+  </div>
+
+
+    {{else}}
+    <!-- ELECTIVES ON SAME PAGE -->
+
+    <!--{{#if on_elective}}
+      <ul class="nav nav-tabs">
+        <li><a href="/requirement/{{requirement}}/{{category}}">Required</a></li>
+        <li class="active"><a href="#">Electives</a></li>
+      </ul>
+    {{else}}  
+      <ul class="nav nav-tabs">
+        <li class="active"><a href="#">Required</a></li>
+        <li><a href="./{{category}}/Electives">Electives</a></li>
+      </ul>
+    {{/if}} -->
+  
+    <div >
+      <h3 style="text-align:center;">{{requirement}} : {{category}} 
+          <button class="btn btn-default btn-xs" type="button"data-toggle="modal" data-target="#details-modal" id='details'>
+            <i class="fa fa-question"></i> Details
+          </button>
+          <br/>
+          <small>{{miniDescription}}</small>
+      </h3>
+      <hr/>
+    </div>
+
+	<!-- this is a comment in HTML -->
+	<div class="container">
+    
+
+    <div class="details_button">
+      
+
+      <!-- Modal -->
+      <div class="modal fade" id="details-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+              <h4 class="modal-title" id="myModalLabel">{{category}} Requirement Details</h4>
+            </div>
+            <div class="modal-body">
+              {{about}}
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="row">
+      {{#each classes}}
+        <div class="button">
+          <div class="col-xs-4">
+            <button type="button" class="btn btn-default btn-md class largeButton" id="{{this}}" data-toggle="modal" data-target="{{this}}-modal">
+              {{this}}
+            </button>
+            <br/>
+            <!-- Button trigger modal -->
+            <button class="btn btn-default thinButton info padding" data-toggle="modal" data-target="#{{this}}-modal" id='info-{{this}}'>
+              <i class="fa fa-info"></i> Info
+            </button>
+          </div>
+
+          <!-- Modal -->
+          <div class="modal fade" id="{{this}}-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                  <h4 class="modal-title" id="myModalLabel"></h4>
+                </div>
+                <div class="modal-body">
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      {{/each}}
+    </div>
+
+    <hr/><h4 style="text-align:center;">ELECTIVES!!</h4><hr/>
+
+    <div class="row">
+      {{#each electives}}
+      <div class="button">
+        <div class="col-xs-4">
+          <button type="button" class="btn btn-default btn-md class largeButton" id="{{this}}" data-toggle="modal" data-target="{{this}}-modal">
+            {{this}}
+          </button>
+          <br/>
+          <!-- Button trigger modal -->
+          <button class="btn btn-default thinButton info padding" data-toggle="modal" data-target="#{{this}}-modal" id='info-{{this}}'>
+            <i class="fa fa-info"></i> Info
+          </button>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="{{this}}-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel"></h4>
+              </div>
+              <div class="modal-body">
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    {{/each}}
+    </div>
+
+    <br/>
+    <br/>
+  </div>
+{{/if}}
+
+{{>back_button}}
+
+{{>save_button}}
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-48686639-1', 'planstanford.herokuapp.com');
+    ga('send', 'pageview');
+
+  </script>
+
+  </body>
+</html>

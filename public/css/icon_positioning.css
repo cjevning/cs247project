@@ -1,0 +1,31 @@
+.iconClicked{
+	background-color: #deebf7;
+}
+
+.bottom_left{
+	position:fixed;
+	width: 70px !important;
+	bottom:5px;
+	left:5px;
+}
+
+.bottom_right{
+	position:fixed;
+	width: 70px !important;
+	bottom:5px;
+	right:5px;
+}
+
+.largeButton {
+    width: 90px;
+    height: 65px;
+}
+
+.thinButton {
+	width: 90px;
+	height: 35px;
+}
+
+.padding {
+	margin-bottom: 10px;
+}

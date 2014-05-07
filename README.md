@@ -1,2 +1,4 @@
-cs247project
-============
+planStanford
+====
+
+CS147 Project
