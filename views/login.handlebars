@@ -81,7 +81,7 @@
     FB.api('/me', function(response) {
       uid = response.uiduid
     });
-    window.location = "./match?user=" + uid;
+    window.location.href = "/match/user=" + uid;
   }
 </script>
 
