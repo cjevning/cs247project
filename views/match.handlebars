@@ -94,6 +94,9 @@ function statusChangeCallback(response) {
     			img.src = "" + my_response.data.url;
     			document.body.appendChild(img);
   			});
+        FB.api('/me/interests', function (my_res) {
+          console.log(my_res);
+        });
     	}
     	//console.log(friendList);
   });
