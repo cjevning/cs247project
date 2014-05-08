@@ -78,9 +78,9 @@ function statusChangeCallback(response) {
   
   function testAPI() {
 
-
     FB.api('/me/friends', function (response) {
     	var friendList = response.data;
+
     	for (var i = 0; i < friendList.length; i++) {
     		FB.api('/'+friendList[i].id+'/picture', function (my_response) {
     			var img = document.createElement("img");
@@ -92,6 +92,7 @@ function statusChangeCallback(response) {
           		console.log(my_res);
         	});
     	}
+
   });
 
   }
