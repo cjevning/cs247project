@@ -8,15 +8,17 @@ exports.match = function(req,res)
 
 exports.addTo = function(req, res) {
 	console.log("hi");
-	
+
      console.log("hi2");
 	var uid1 = req.params.uid1;
 	var uid2 = req.params.uid2;
 	var rec = req.params.recommender;
 	console.log("hi2.5");
+	//{"uid1": uid1, "uid2": uid2}
 	var l = models.Match.find().exec(addToArray);
 	function addToArray(err, toAdd) {
 		console.log("hi3");
+		/*
 		if(err) console.log(err);
 		if (toAdd[0]) {
 			var recs = toAdd[0].recommenders;
@@ -59,6 +61,6 @@ exports.addTo = function(req, res) {
 					}
 				}
 			}
-		}
+		}*/
 	}
 }
