@@ -7,11 +7,21 @@ exports.match = function(req,res)
 }
 
 exports.addTo = function(req, res) {
+	console.log("hi");
+	var m = models.Match.find().exec(addToArray2);
+      function addToArray2(err, toAdd2) {
+      	if(err) console.log(err);
+        console.log(toAdd2);
+      }
+     console.log("hi2");
 	var uid1 = req.params.uid1;
 	var uid2 = req.params.uid2;
 	var rec = req.params.recommender;
+	console.log("hi2.5");
 	var l = models.Match.find({"uid1": uid1, "uid2": uid2}).exec(addToArray);
 	function addToArray(err, toAdd) {
+		console.log("hi3");
+		if(err) console.log(err);
 		if (toAdd[0]) {
 			var recs = toAdd[0].recommenders;
 			var oldNum = toAdd[0].numRecs;
@@ -26,6 +36,7 @@ exports.addTo = function(req, res) {
 		else {
 			var m = models.Match.find({"uid1": uid2, "uid2": uid1}).exec(addToArray2);
 			function addToArray2(err, toAdd2) {
+				if(err) console.log(err);
 				if (toAdd2[0]) {
 					var recs = toAdd2[0].recommenders;
 					var oldNum = toAdd2[0].numRecs;

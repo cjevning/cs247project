@@ -77,29 +77,40 @@ function statusChangeCallback(response) {
   }(document, 'script', 'facebook-jssdk'));
   
   function testAPI() {
-  //   FB.api('/10152423734788293/picture', function (response) {
-  //   	var img = document.createElement("img");
-  //   	img.src = "" + response.data.url;
-  //   	document.body.appendChild(img);
-  // });
-  //comment
 
-        FB.api('/me/friends', function (response) {
+    FB.api('/me/friends', function (response) {
     	var friendList = response.data;
-    	console.log(friendList);
+
     	for (var i = 0; i < friendList.length; i++) {
-    		//console.log(friendList[0].name);
+        console.log("Length: " + friendList.length);
     		FB.api('/'+friendList[i].id+'/picture', function (my_response) {
     			var img = document.createElement("img");
     			img.src = "" + my_response.data.url;
-    			document.body.appendChild(img);
+          img.setAttribute("style", "height: 100px; width: 100px");
+    			//document.body.appendChild(img);
+          document.getElementById("FBPic1").appendChild(img);
+          //document.getElementById("FBPic1").innerHTML = friendList[i].name;
   			});
-        FB.api('/me/interests', function (my_res) {
-          console.log(my_res);
-        });
+        	
+        	FB.api('/'+friendList[i].id+'/likes', function (my_res) {
+          		console.log(my_res);
+        	});
     	}
-    	//console.log(friendList);
-  });
+      var friendindex1 = Math.floor(Math.random() * 4);
+      var friendindex2 = Math.floor(Math.random() * 4);
+      while(friendindex1 == friendindex2) {
+        friendindex2 = Math.floor(Math.random() * 4);
+      }
+      console.log(friendindex1);
+      console.log(friendindex2);
+      console.log(friendList[friendindex1].name);
+      console.log(friendList[friendindex2].name);
+      console.log(friendList[friendindex1].id);
+      console.log(friendList[friendindex2].id);
+      document.getElementById("id1").innerHTML = friendList[friendindex1].id;
+      document.getElementById("id2").innerHTML = friendList[friendindex2].id;
+
+    });
 
   }
 
@@ -107,22 +118,34 @@ function statusChangeCallback(response) {
     var path = window.location.pathname;
     var splits = path.split("=");
     var loggedIn = splits[1];
-    var url_call = "/match/678780/789071328/1234789";
+    var uid1 = document.getElementById("id1").innerHTML;
+    var uid2 = document.getElementById("id2").innerHTML;
+    var url_call = "/match/"+uid1+"/"+uid2+"/"+loggedIn;
     $.post(url_call);
-    alert(loggedIn);
+    alert(url_call);
   }
 </script>
 </head>
 <body>
 
-<p>Hi!</p>
+<div id="FBPic1" style="height:100px">
+</div>
+<div id="FBPic2" style="height:100px">
+</div>
+<p id="id1"></p>
+<p id="id2"></p>
+
+
 <div>
 <button type="button" class="btn btn-default btn-lg">
   <span> <i class="fa fa-thumbs-o-down fa-5x"></i></span>
 </button>
-<button type="button" class="btn btn-default btn-lg">
+<!-- <button type="button" class="btn btn-default btn-lg">
   <span> <i class="fa fa-info fa-5x"></i></span>
 </button>
+
+
+-->
 <button type="button" class="btn btn-default btn-lg" onclick="addToMatches()">
   <span> <i class="fa fa-thumbs-o-up fa-5x"></i></span>
 </button>
