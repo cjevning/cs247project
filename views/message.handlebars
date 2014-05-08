@@ -95,24 +95,30 @@ function statusChangeCallback(response) {
 	});
 }
 
-function addtext() {
+function send() {
 	var newtext = '\n'+user_name + ": " + document.myform.addText.value;
 	document.myform.conversation.value += newtext;
 }
+
+function goBack(){
+	window.location.href = "/match/user=" + curr_user;
+}
+
 </script>
 
 <form name="myform">
+	<div>
+		<textarea name="conversation" rows="15" cols="50" readonly> Congratulations you have a match! Start messaging now!
+		</textarea>
 
-<textarea name="conversation" rows="15" cols="50" readonly>
-Congratulations you have a match! Start messaging now!
-</textarea>
+		<textarea name="addText" rows="2" cols="50"> </textarea>
 
-<textarea name="addText" rows="2" cols="50">
-</textarea>
+		<input type="button" value="Send" onClick="send();">
 
-<input type="button" value="Send" onClick="addtext();">
+	</div>
 </form>
 
+<button type="button" onclick="goBack();"> Back </button>
 
 </body>
 </html>

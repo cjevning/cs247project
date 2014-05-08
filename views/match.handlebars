@@ -137,15 +137,14 @@ function statusChangeCallback(response) {
     var uid2 = document.getElementById("id2").innerHTML;
     var url_call = "/match/"+uid1+"/"+uid2+"/"+loggedIn;
     testAPI();
-    window.location.href = "/message/&" + uid1 + "&" + uid2 + "&" + uid3;
     //$.post(url_call);
     //alert(url_call);
   }
 
-  	// function nextPage(){
-  	// 	//uid3 is the person who made the recommendation
-  	// 	window.location.href = "/message/&" + uid1 + "&" + uid2 + "&" + uid3;
-  	// }
+  function toMessagePage(){
+  	window.location.href = "/message/&" + uid1 + "&" + uid2 + "&" + uid3;
+  }
+
 </script>
 </head>
 <body>
@@ -173,9 +172,17 @@ function statusChangeCallback(response) {
   <span> <i class="fa fa-info fa-5x"></i></span>
 </button>
 -->
+
+<button type="button" class="btn btn-default btn-lg" onclick="toMessagePage()">
+  <span> <i class="fa fa-smile-o fa-5x"></i></span>
+</button>
+
 <button type="button" class="btn btn-default btn-lg" onclick="addToMatches()">
   <span> <i class="fa fa-thumbs-o-up fa-5x"></i></span>
 </button>
+
+
+
 </div>
 <br/>
 <p>Friends using SetEmUp:</p>
