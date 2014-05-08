@@ -136,14 +136,15 @@ function statusChangeCallback(response) {
     var uid2 = document.getElementById("id2").innerHTML;
     var url_call = "/match/"+uid1+"/"+uid2+"/"+loggedIn;
     testAPI();
+    window.location.href = "/message/&" + uid1 + "&" + uid2 + "&" + uid3;
     //$.post(url_call);
     //alert(url_call);
   }
 
-  	function nextPage(){
-  		//uid3 is the person who made the recommendation
-  		window.location.href = "/message/&" + uid1 + "&" + uid2 + "&" + uid3;
-  	}
+  	// function nextPage(){
+  	// 	//uid3 is the person who made the recommendation
+  	// 	window.location.href = "/message/&" + uid1 + "&" + uid2 + "&" + uid3;
+  	// }
 </script>
 </head>
 <body>
