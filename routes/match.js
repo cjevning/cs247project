@@ -1,4 +1,4 @@
-var models = require('../models.js');
+var models = require('../models');
 
 exports.match = function(req,res)
 {
