@@ -16,6 +16,7 @@ var category = require('./routes/category');
 var data_functions = require('./routes/data_functions');
 var login = require('./routes/login');
 var summary = require('./routes/summary');
+var match = require('./routes/match');
 var app = express();
 
 
@@ -41,6 +42,7 @@ if ('development' == app.get('env')) {
 
 // Webpages
 app.get('/', login.viewLogin);
+app.get('/match/:uid', match.match);
 app.get('/home',home.viewHome);
 app.get('/requirement/:requirement',requirement.viewRequirementAlternate);
 app.get('/requirement/:requirement/alternate',requirement.viewRequirementAlternate);
