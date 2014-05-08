@@ -17,6 +17,7 @@ var data_functions = require('./routes/data_functions');
 var login = require('./routes/login');
 var summary = require('./routes/summary');
 var match = require('./routes/match');
+var message = require('./routes/message');
 var app = express();
 
 
@@ -43,6 +44,7 @@ if ('development' == app.get('env')) {
 // Webpages
 app.get('/', login.viewLogin);
 app.get('/match/:uid', match.match);
+app.get('/message/:uid1&:uid2&:uid3', message.message);
 app.get('/home',home.viewHome);
 app.get('/requirement/:requirement',requirement.viewRequirementAlternate);
 app.get('/requirement/:requirement/alternate',requirement.viewRequirementAlternate);

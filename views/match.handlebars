@@ -76,31 +76,36 @@ function statusChangeCallback(response) {
     fjs.parentNode.insertBefore(js, fjs);
   }(document, 'script', 'facebook-jssdk'));
   
+  var uid1;
+  var uid2;
+  var pathname = window.location.pathname;
+  var splits = pathname.split("=");
+  var uid3 = splits[1];
+
   function testAPI() {
 
     FB.api('/me/friends', function (response) {
     	var friendList = response.data;
 
     	for (var i = 0; i < friendList.length; i++) {
-        console.log("Length: " + friendList.length);
     		FB.api('/'+friendList[i].id+'/picture', function (my_response) {
     			var img = document.createElement("img");
     			img.src = "" + my_response.data.url;
-          //img.setAttribute("style", "height: 100px; width: 100px");
+
     			document.body.appendChild(img);
-          //document.getElementById("FBPic1").appendChild(img);
-          //document.getElementById("FBPic1").innerHTML = friendList[i].name;
+
   			});
-        	
-        	FB.api('/'+friendList[i].id+'/likes', function (my_res) {
-          		console.log(my_res);
-        	});
+
     	}
-      var friendindex1 = Math.floor(Math.random() * 4);
-      var friendindex2 = Math.floor(Math.random() * 4);
+      var friendindex1 = Math.floor(Math.random() * friendList.length);
+      var friendindex2 = Math.floor(Math.random() * friendList.length);
       while(friendindex1 == friendindex2) {
-        friendindex2 = Math.floor(Math.random() * 4);
+        friendindex2 = Math.floor(Math.random() * friendList.length);
       }
+
+      uid1 = friendList[friendindex1].id;
+      uid2 = friendList[friendindex2].id;
+
       document.getElementById("id1").innerHTML = friendList[friendindex1].id;
       document.getElementById("id2").innerHTML = friendList[friendindex2].id;
       document.getElementById("name1").innerHTML = friendList[friendindex1].name;
@@ -120,6 +125,11 @@ function statusChangeCallback(response) {
     });
 
   }
+
+  	function nextPage(){
+  		//uid3 is the person who made the recommendation
+  		window.location.href = "/message/&" + uid1 + "&" + uid2 + "&" + uid3;
+  	}
 </script>
 </head>
 <body>
@@ -146,7 +156,7 @@ function statusChangeCallback(response) {
 <!-- <button type="button" class="btn btn-default btn-lg">
   <span> <i class="fa fa-info fa-5x"></i></span>
 </button> -->
-<button type="button" class="btn btn-default btn-lg">
+<button type="button" class="btn btn-default btn-lg"  onclick="nextPage();">
   <span> <i class="fa fa-thumbs-o-up fa-5x"></i></span>
 </button>
 </div>
