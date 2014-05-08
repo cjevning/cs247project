@@ -8,11 +8,7 @@ exports.match = function(req,res)
 
 exports.addTo = function(req, res) {
 	console.log("hi");
-	var m = models.Match.find().exec(addToArray2);
-      function addToArray2(err, toAdd2) {
-      	if(err) console.log(err);
-        console.log(toAdd2);
-      }
+	
      console.log("hi2");
 	var uid1 = req.params.uid1;
 	var uid2 = req.params.uid2;
