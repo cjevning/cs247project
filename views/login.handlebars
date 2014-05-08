@@ -79,10 +79,9 @@
   function testAPI() {
     var uid;
     FB.api('/me', function(response) {
-      uid = response.authResponse.userID;
-      console.log(uid);
+      uid = response.id;
+      window.location.href = "/match/user=" + uid;
     });
-    window.location.href = "/match/user=" + uid;
   }
 </script>
 
