@@ -86,9 +86,9 @@ function statusChangeCallback(response) {
     		FB.api('/'+friendList[i].id+'/picture', function (my_response) {
     			var img = document.createElement("img");
     			img.src = "" + my_response.data.url;
-          img.setAttribute("style", "height: 100px; width: 100px");
-    			//document.body.appendChild(img);
-          document.getElementById("FBPic1").appendChild(img);
+          //img.setAttribute("style", "height: 100px; width: 100px");
+    			document.body.appendChild(img);
+          //document.getElementById("FBPic1").appendChild(img);
           //document.getElementById("FBPic1").innerHTML = friendList[i].name;
   			});
         	
@@ -101,28 +101,42 @@ function statusChangeCallback(response) {
       while(friendindex1 == friendindex2) {
         friendindex2 = Math.floor(Math.random() * 4);
       }
-      console.log(friendindex1);
-      console.log(friendindex2);
-      console.log(friendList[friendindex1].name);
-      console.log(friendList[friendindex2].name);
-      console.log(friendList[friendindex1].id);
-      console.log(friendList[friendindex2].id);
       document.getElementById("id1").innerHTML = friendList[friendindex1].id;
       document.getElementById("id2").innerHTML = friendList[friendindex2].id;
-
+      document.getElementById("name1").innerHTML = friendList[friendindex1].name;
+      document.getElementById("name2").innerHTML = friendList[friendindex2].name;
+      FB.api('/'+friendList[friendindex1].id+'/picture', function (my_response) {
+          var img = document.createElement("img");
+          img.src = "" + my_response.data.url;
+          img.setAttribute("style", "height: 100px; width: 100px"); 
+          document.getElementById("FBPic1").appendChild(img);
+        });
+      FB.api('/'+friendList[friendindex2].id+'/picture', function (my_response) {
+          var img = document.createElement("img");
+          img.src = "" + my_response.data.url;
+          img.setAttribute("style", "height: 100px; width: 100px"); 
+          document.getElementById("FBPic2").appendChild(img);
+        });
     });
 
   }
 </script>
 </head>
 <body>
+<div style="height:50px, width:500px;"></div>
+<div style="height:500px, width:500px, margin: 30px, display:inline-block;">
+  <div style="float:left;">
+    <div id="FBPic1" style="height:100px"></div>
+    <p id="name1"></p>
+  </div>
+  <div style="float:right, margin:5px;">
+    <div id="FBPic2" style="height:100px"></div>
+    <p id="name2"></p>
+  </div>
+</div>
 
-<div id="FBPic1" style="height:100px">
-</div>
-<div id="FBPic2" style="height:100px">
-</div>
-<p id="id1"></p>
-<p id="id2"></p>
+<p id="id1" style="visibility:hidden"></p>
+<p id="id2" style="visibility:hidden"></p>
 
 
 <div>
@@ -136,6 +150,8 @@ function statusChangeCallback(response) {
   <span> <i class="fa fa-thumbs-o-up fa-5x"></i></span>
 </button>
 </div>
+<br/>
+<p>Friends using SetEmUp:</p>
 
 </body>
 </html>
