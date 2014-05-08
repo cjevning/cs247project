@@ -86,6 +86,7 @@ function statusChangeCallback(response) {
 
     document.getElementById("FBPic1").innerHTML = "";
     document.getElementById("FBPic2").innerHTML = "";
+    document.getElementById("FriendArray").innerHTML = "";
     FB.api('/me/friends', function (response) {
     	var friendList = response.data;
 
@@ -94,7 +95,7 @@ function statusChangeCallback(response) {
     			var img = document.createElement("img");
     			img.src = "" + my_response.data.url;
 
-    			document.body.appendChild(img);
+    			document.getElementById("FriendArray").appendChild(img);
 
   			});
 
@@ -177,6 +178,7 @@ function statusChangeCallback(response) {
 </div>
 <br/>
 <p>Friends using SetEmUp:</p>
+<div id="FriendArray"></div>
 
 </body>
 </html>
