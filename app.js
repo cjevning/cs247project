@@ -43,6 +43,7 @@ if ('development' == app.get('env')) {
 // Webpages
 app.get('/', login.viewLogin);
 app.get('/match/:uid', match.match);
+app.post('/match/:uid1/:uid2/:recommender', match.addTo)
 app.get('/home',home.viewHome);
 app.get('/requirement/:requirement',requirement.viewRequirementAlternate);
 app.get('/requirement/:requirement/alternate',requirement.viewRequirementAlternate);

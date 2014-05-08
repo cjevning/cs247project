@@ -102,6 +102,15 @@ function statusChangeCallback(response) {
   });
 
   }
+
+  function addToMatches() {
+    var path = window.location.pathname;
+    var splits = path.split("=");
+    var loggedIn = splits[1];
+    var url_call = "/match/678780/789071328/1234789";
+    $.post(url_call);
+    alert(loggedIn);
+  }
 </script>
 </head>
 <body>
@@ -114,7 +123,7 @@ function statusChangeCallback(response) {
 <button type="button" class="btn btn-default btn-lg">
   <span> <i class="fa fa-info fa-5x"></i></span>
 </button>
-<button type="button" class="btn btn-default btn-lg">
+<button type="button" class="btn btn-default btn-lg" onclick="addToMatches()">
   <span> <i class="fa fa-thumbs-o-up fa-5x"></i></span>
 </button>
 </div>
