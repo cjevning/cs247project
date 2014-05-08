@@ -84,6 +84,8 @@ function statusChangeCallback(response) {
 
   function testAPI() {
 
+    document.getElementById("FBPic1").innerHTML = "";
+    document.getElementById("FBPic2").innerHTML = "";
     FB.api('/me/friends', function (response) {
     	var friendList = response.data;
 
@@ -126,6 +128,18 @@ function statusChangeCallback(response) {
 
   }
 
+  function addToMatches() {
+    var path = window.location.pathname;
+    var splits = path.split("=");
+    var loggedIn = splits[1];
+    var uid1 = document.getElementById("id1").innerHTML;
+    var uid2 = document.getElementById("id2").innerHTML;
+    var url_call = "/match/"+uid1+"/"+uid2+"/"+loggedIn;
+    testAPI();
+    //$.post(url_call);
+    //alert(url_call);
+  }
+
   	function nextPage(){
   		//uid3 is the person who made the recommendation
   		window.location.href = "/message/&" + uid1 + "&" + uid2 + "&" + uid3;
@@ -150,13 +164,14 @@ function statusChangeCallback(response) {
 
 
 <div>
-<button type="button" class="btn btn-default btn-lg">
+<button type="button" class="btn btn-default btn-lg" onclick="testAPI()">
   <span> <i class="fa fa-thumbs-o-down fa-5x"></i></span>
 </button>
 <!-- <button type="button" class="btn btn-default btn-lg">
   <span> <i class="fa fa-info fa-5x"></i></span>
-</button> -->
-<button type="button" class="btn btn-default btn-lg"  onclick="nextPage();">
+</button>
+-->
+<button type="button" class="btn btn-default btn-lg" onclick="addToMatches()">
   <span> <i class="fa fa-thumbs-o-up fa-5x"></i></span>
 </button>
 </div>
