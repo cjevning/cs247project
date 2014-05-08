@@ -83,17 +83,17 @@ function statusChangeCallback(response) {
   //   	document.body.appendChild(img);
   // });
 
-        FB.api('/me/friends', function (response) {
+        FB.api('/me/', function (response) {
     	var friendList = response.data;
-    	console.log(friendList);
-    	for (var i = 0; i < friendList.length; i++) {
-    		//console.log(friendList[0].name);
-    		FB.api('/'+friendList[i].id+'/picture', function (my_response) {
-    			var img = document.createElement("img");
-    			img.src = "" + my_response.data.url;
-    			document.body.appendChild(img);
-  			});
-    	}
+    	console.log(response);
+    	// for (var i = 0; i < friendList.length; i++) {
+    	// 	//console.log(friendList[0].name);
+    	// 	FB.api('/'+friendList[i].id+'/picture', function (my_response) {
+    	// 		var img = document.createElement("img");
+    	// 		img.src = "" + my_response.data.url;
+    	// 		document.body.appendChild(img);
+  			// });
+    	// }
     	//console.log(friendList);
   });
 
