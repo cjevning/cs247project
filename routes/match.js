@@ -14,7 +14,7 @@ exports.addTo = function(req, res) {
 	var uid2 = req.params.uid2;
 	var rec = req.params.recommender;
 	console.log("hi2.5");
-	var l = models.Match.find({"uid1": uid1, "uid2": uid2}).exec(addToArray);
+	var l = models.Match.find().exec(addToArray);
 	function addToArray(err, toAdd) {
 		console.log("hi3");
 		if(err) console.log(err);
