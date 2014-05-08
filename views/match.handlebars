@@ -85,7 +85,9 @@ function statusChangeCallback(response) {
     		FB.api('/'+friendList[i].id+'/picture', function (my_response) {
     			var img = document.createElement("img");
     			img.src = "" + my_response.data.url;
-    			document.body.appendChild(img);
+          img.setAttribute("style", "height: 100px; width: 100px");
+    			//document.body.appendChild(img);
+          document.getElementById("FBPic2").appendChild(img);
   			});
         	
         	FB.api('/'+friendList[i].id+'/likes', function (my_res) {
@@ -99,6 +101,12 @@ function statusChangeCallback(response) {
 </script>
 </head>
 <body>
+
+<div id="FBPic1" style="height:100px">
+</div>
+<div id="FBPic2" style="height:100px">
+</div>
+
 
 <div>
 <button type="button" class="btn btn-default btn-lg">
