@@ -78,6 +78,8 @@ function statusChangeCallback(response) {
   
   function testAPI() {
 
+    document.getElementById("FBPic1").innerHTML = "";
+    document.getElementById("FBPic2").innerHTML = "";
     FB.api('/me/friends', function (response) {
     	var friendList = response.data;
 
@@ -128,9 +130,11 @@ function statusChangeCallback(response) {
     var uid1 = document.getElementById("id1").innerHTML;
     var uid2 = document.getElementById("id2").innerHTML;
     var url_call = "/match/"+uid1+"/"+uid2+"/"+loggedIn;
-    $.post(url_call);
-    alert(url_call);
+    testAPI();
+    //$.post(url_call);
+    //alert(url_call);
   }
+
 </script>
 </head>
 <body>
@@ -151,7 +155,7 @@ function statusChangeCallback(response) {
 
 
 <div>
-<button type="button" class="btn btn-default btn-lg">
+<button type="button" class="btn btn-default btn-lg" onclick="testAPI()">
   <span> <i class="fa fa-thumbs-o-down fa-5x"></i></span>
 </button>
 <!-- <button type="button" class="btn btn-default btn-lg">
