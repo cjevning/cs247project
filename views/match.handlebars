@@ -69,9 +69,12 @@ function statusChangeCallback(response) {
   }(document, 'script', 'facebook-jssdk'));
   
   function testAPI() {
-    FB.api('/me/friends', function (response) {
-    console.log(response);
+    FB.api('/10152423734788293/picture', function (response) {
+    	var img = document.createElement("img");
+    	img.src = "" + response.data.url;
+    	document.body.appendChild(img);
   });
+
   }
 </script>
 </head>
