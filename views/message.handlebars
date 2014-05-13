@@ -96,7 +96,7 @@ function statusChangeCallback(response) {
 }
 
 function send() {
-	var newtext = '\n'+user_name + ": " + document.myform.addText.value;
+	var newtext = '\n'+ user_name + ": " + document.myform.addText.value;
 	document.myform.conversation.value += newtext;
 }
 
@@ -110,15 +110,17 @@ function goBack(){
 	<div>
 		<textarea name="conversation" rows="15" cols="50" readonly> Congratulations you have a match! Start messaging now!
 		</textarea>
-
-		<textarea name="addText" rows="2" cols="50"> </textarea>
-
-		<input type="button" value="Send" onClick="send();">
-
+    <div>
+		  <textarea name="addText" rows="2" cols="50"> </textarea>
+    </div>
+    <div>
+      <button type="button" onclick="goBack();"> Back </button>
+		  <input type="button" value="Send" onClick="send();">
+    </div>
 	</div>
 </form>
 
-<button type="button" onclick="goBack();"> Back </button>
+
 
 </body>
 </html>
