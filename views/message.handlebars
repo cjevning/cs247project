@@ -87,13 +87,25 @@ function statusChangeCallback(response) {
   var splits = pathname.split("&");
   var curr_user = splits[3]; // Because currently the texter is the person who hit like
   var user_name;
-
+  var my_match = '/' +splits[1] + '/';
+  var matcher = '/' + splits[2] + '/';
+  var my_match_name;
 
   function testAPI() {
     FB.api('/me/', function (response) {
     	user_name = response.first_name;
 	});
+    FB.api(my_match, function (response) {
+      my_match_name = response.first_name;
+      //$("#matcher span").html(match_name);
+  });
+    FB.api(matcher, function (response) {
+      var matcher_name = response.first_name + " " + response.last_name;
+      $("#match span").html(matcher_name + " has matched you with " + my_match_name + "!");
+  });
 }
+
+
 
 function send() {
 	var newtext = '\n'+ user_name + ": " + document.myform.addText.value;
@@ -107,8 +119,12 @@ function goBack(){
 </script>
 
 <form name="myform">
+  <div>
+    <h2 id="match">Congratulations <span></span></h2>
+  </div>
+
 	<div>
-		<textarea name="conversation" rows="15" cols="50" readonly> Congratulations you have a match! Start messaging now!
+		<textarea name="conversation" rows="15" cols="50" readonly>Start messaging now!
 		</textarea>
     <div>
 		  <textarea name="addText" rows="2" cols="50"> </textarea>
