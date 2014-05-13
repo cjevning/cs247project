@@ -157,6 +157,12 @@ function statusChangeCallback(response) {
 </script>
 </head>
 <body>
+<div id="switchScreen" class="switch" onclick="toMessagePage()">
+<button type="button" id="notification" class="btn btn-default" onclick="toMessagePage()" style="display:none">
+  <span> <i class="fa fa-smile-o fa-5x"></i></span>
+</button>
+<p>Switch to Messages</p>
+</div>
 <div style="height:50px, width:500px;"></div>
 <div style="height:500px, width:500px, margin: 30px, display:inline-block;">
   <div style="float:left;">
@@ -182,9 +188,7 @@ function statusChangeCallback(response) {
 </button>
 -->
 
-<button type="button" id="notification" class="btn btn-default btn-lg" onclick="toMessagePage()" style="display:none">
-  <span> <i class="fa fa-smile-o fa-5x"></i></span>
-</button>
+
 
 <button type="button" class="btn btn-default btn-lg" onclick="addToMatches()">
   <span> <i class="fa fa-thumbs-o-up fa-5x"></i></span>
