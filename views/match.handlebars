@@ -147,7 +147,6 @@ function statusChangeCallback(response) {
     var url_call = "/match/"+uid1+"/"+uid2+"/"+loggedIn+"/good";
     testAPI();
     $.post(url_call);
-    alert(url_call);
   }
 
   function badMatch() {
@@ -159,7 +158,6 @@ function statusChangeCallback(response) {
     var url_call = "/match/"+uid1+"/"+uid2+"/"+loggedIn+"/bad";
     testAPI();
     $.post(url_call);
-    alert(url_call);
   }
 
   function toMessagePage(){

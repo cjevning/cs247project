@@ -72,7 +72,7 @@ exports.bad = function(req, res) {
 	    "uid2": uid2,
 	    "recommender": rec,
 	});
-	newMatch.save(afterSave);
+	newNoMatch.save(afterSave);
 	function afterSave(err, resu) {	
 	    if(err) console.log(err);
 	    res.send();
