@@ -7,7 +7,6 @@ exports.match = function(req,res)
 }
 
 exports.good = function(req, res) {
-	console.log("good");
 	var uid1 = req.params.uid1;
 	var uid2 = req.params.uid2;
 	var rec = req.params.recommender;
@@ -63,7 +62,6 @@ exports.good = function(req, res) {
 
 
 exports.bad = function(req, res) {
-	console.log("bad");
 	var uid1 = req.params.uid1;
 	var uid2 = req.params.uid2;
 	var rec = req.params.recommender;
