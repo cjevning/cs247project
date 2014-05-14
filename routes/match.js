@@ -67,6 +67,6 @@ exports.addTo = function(req, res) {
 					}
 				}
 			}
-		}*/
+		}
 	}
 }
