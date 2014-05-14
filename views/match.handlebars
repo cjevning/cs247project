@@ -138,16 +138,16 @@ function statusChangeCallback(response) {
 
   }
 
-  function addToMatches() {
+  function addToMatches(status) {
     var path = window.location.pathname;
     var splits = path.split("=");
     var loggedIn = splits[1];
     var uid1 = document.getElementById("id1").innerHTML;
     var uid2 = document.getElementById("id2").innerHTML;
-    var url_call = "/match/"+uid1+"/"+uid2+"/"+loggedIn;
+    var url_call = "/match/"+uid1+"/"+uid2+"/"+loggedIn+"/"+status;
     testAPI();
     $.post(url_call);
-    //alert(url_call);
+    alert(url_call);
   }
 
   function toMessagePage(){
@@ -180,7 +180,7 @@ function statusChangeCallback(response) {
 
 
 <div>
-<button type="button" class="btn btn-default btn-lg" onclick="testAPI()">
+<button type="button" class="btn btn-default btn-lg" onclick="addToMatches(\'bad\')">
   <span> <i class="fa fa-thumbs-o-down fa-5x"></i></span>
 </button>
 <!-- <button type="button" class="btn btn-default btn-lg">
@@ -190,7 +190,7 @@ function statusChangeCallback(response) {
 
 
 
-<button type="button" class="btn btn-default btn-lg" onclick="addToMatches()">
+<button type="button" class="btn btn-default btn-lg" onclick="addToMatches(\'good\')">
   <span> <i class="fa fa-thumbs-o-up fa-5x"></i></span>
 </button>
 
