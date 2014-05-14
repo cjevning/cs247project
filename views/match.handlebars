@@ -146,7 +146,7 @@ function statusChangeCallback(response) {
     var uid2 = document.getElementById("id2").innerHTML;
     var url_call = "/match/"+uid1+"/"+uid2+"/"+loggedIn;
     testAPI();
-    //$.post(url_call);
+    $.post(url_call);
     //alert(url_call);
   }
 
