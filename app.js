@@ -18,6 +18,12 @@ var login = require('./routes/login');
 var summary = require('./routes/summary');
 var match = require('./routes/match');
 var message = require('./routes/message');
+
+var local_database_name = 'cs247project';
+var local_database_uri  = 'mongodb://localhost/' + local_database_name
+var database_uri = process.env.MONGOLAB_URI || local_database_uri
+mongoose.connect(database_uri);
+
 var app = express();
 
 
