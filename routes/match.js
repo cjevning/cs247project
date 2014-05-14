@@ -17,7 +17,7 @@ exports.addTo = function(req, res) {
 	//{"uid1": uid1, "uid2": uid2}
 	var l = models.Match.find({"uid1": uid1, "uid2": uid2}).exec(addToArray);
 	function addToArray(err, toAdd) {
-		if(err) console.log(err);
+		if(err) { console.log(err); res.send(500); }
 		console.log("hi3");
 		res.send();
 		/*
