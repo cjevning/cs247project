@@ -111,7 +111,7 @@ function statusChangeCallback(response) {
         }
 
 
-    		FB.api('/'+friendList[i].id+'/picture', function (my_response) {
+    		FB.api('/'+friendList[i].id+'/picture?type=square', function (my_response) {
     			var img = document.createElement("img");
     			img.src = "" + my_response.data.url;
 
@@ -119,6 +119,7 @@ function statusChangeCallback(response) {
   			});
 
     	}
+<<<<<<< HEAD
 
       var friendindex1 = Math.floor(Math.random() * maleFriends.length);
       var friendindex2 = Math.floor(Math.random() * femaleFriends.length);
@@ -130,16 +131,19 @@ function statusChangeCallback(response) {
       document.getElementById("id2").innerHTML = uid2;
       document.getElementById("name1").innerHTML = maleFriends[friendindex1].name;
       document.getElementById("name2").innerHTML = femaleFriends[friendindex2].name;
-      FB.api('/'+maleFriends[friendindex1].id+'/picture', function (my_response) {
+      FB.api('/'+maleFriends[friendindex1].id+'/picture?type=large', function (my_response) {
+
           var img = document.createElement("img");
           img.src = "" + my_response.data.url;
-          img.setAttribute("style", "height: 100px; width: 100px"); 
+          img.setAttribute("style", "height: 150px; width: 150px"); 
           document.getElementById("FBPic1").appendChild(img);
         });
-      FB.api('/'+femaleFriends[friendindex2].id+'/picture', function (my_response) {
+
+      FB.api('/'+femaleFriends[friendindex2].id+'/picture?type=large', function (my_response) {
+
           var img = document.createElement("img");
           img.src = "" + my_response.data.url;
-          img.setAttribute("style", "height: 100px; width: 100px"); 
+          img.setAttribute("style", "height: 150px; width: 150px"); 
           document.getElementById("FBPic2").appendChild(img);
         });
 
@@ -148,16 +152,26 @@ function statusChangeCallback(response) {
   }
 
 
-  function addToMatches() {
+  function goodMatch() {
     var path = window.location.pathname;
     var splits = path.split("=");
     var loggedIn = splits[1];
     var uid1 = document.getElementById("id1").innerHTML;
     var uid2 = document.getElementById("id2").innerHTML;
-    var url_call = "/match/"+uid1+"/"+uid2+"/"+loggedIn;
+    var url_call = "/match/"+uid1+"/"+uid2+"/"+loggedIn+"/good";
     testAPI();
-    //$.post(url_call);
-    //alert(url_call);
+    $.post(url_call);
+  }
+
+  function badMatch() {
+    var path = window.location.pathname;
+    var splits = path.split("=");
+    var loggedIn = splits[1];
+    var uid1 = document.getElementById("id1").innerHTML;
+    var uid2 = document.getElementById("id2").innerHTML;
+    var url_call = "/match/"+uid1+"/"+uid2+"/"+loggedIn+"/bad";
+    testAPI();
+    $.post(url_call);
   }
 
   function toMessagePage(){
@@ -173,14 +187,14 @@ function statusChangeCallback(response) {
 </button>
 <p>Switch to Messages</p>
 </div>
-<div style="height:50px, width:500px;"></div>
+<div style="height:100px, width:500px;"></div>
 <div style="height:500px, width:500px, margin: 30px, display:inline-block;">
   <div style="float:left;">
-    <div id="FBPic1" style="height:100px"></div>
+    <div id="FBPic1" style="height:150px"></div>
     <p id="name1"></p>
   </div>
   <div style="float:right, margin:5px;">
-    <div id="FBPic2" style="height:100px"></div>
+    <div id="FBPic2" style="height:150px"></div>
     <p id="name2"></p>
   </div>
 </div>
@@ -190,7 +204,7 @@ function statusChangeCallback(response) {
 
 
 <div>
-<button type="button" class="btn btn-default btn-lg" onclick="testAPI()">
+<button type="button" class="btn btn-default btn-lg" onclick="badMatch()">
   <span> <i class="fa fa-thumbs-o-down fa-5x"></i></span>
 </button>
 <!-- <button type="button" class="btn btn-default btn-lg">
@@ -200,7 +214,7 @@ function statusChangeCallback(response) {
 
 
 
-<button type="button" class="btn btn-default btn-lg" onclick="addToMatches()">
+<button type="button" class="btn btn-default btn-lg" onclick="goodMatch()">
   <span> <i class="fa fa-thumbs-o-up fa-5x"></i></span>
 </button>
 

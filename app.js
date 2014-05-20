@@ -7,6 +7,7 @@ var express = require('express');
 var http = require('http');
 var path = require('path');
 var handlebars = require('express3-handlebars');
+var mongoose = require('mongoose');
 
 
 // Routes
@@ -18,6 +19,12 @@ var login = require('./routes/login');
 var summary = require('./routes/summary');
 var match = require('./routes/match');
 var message = require('./routes/message');
+
+var local_database_name = 'cs247project';
+var local_database_uri  = 'mongodb://localhost/' + local_database_name
+var database_uri = process.env.MONGOLAB_URI || local_database_uri
+mongoose.connect(database_uri);
+
 var app = express();
 
 
@@ -44,7 +51,8 @@ if ('development' == app.get('env')) {
 // Webpages
 app.get('/', login.viewLogin);
 app.get('/match/:uid', match.match);
-app.post('/match/:uid1/:uid2/:recommender', match.addTo)
+app.post('/match/:uid1/:uid2/:recommender/good', match.good);
+app.post('/match/:uid1/:uid2/:recommender/bad', match.bad);
 app.get('/message/:uid1&:uid2&:uid3', message.message);
 app.get('/home',home.viewHome);
 app.get('/requirement/:requirement',requirement.viewRequirementAlternate);
