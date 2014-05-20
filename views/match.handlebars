@@ -92,51 +92,61 @@ function statusChangeCallback(response) {
   var uid3 = splits[1];
 
   function testAPI() {
+      var femaleFriends = new Array();
+      var maleFriends = new Array();
+
 
     document.getElementById("FBPic1").innerHTML = "";
     document.getElementById("FBPic2").innerHTML = "";
     document.getElementById("FriendArray").innerHTML = "";
-    FB.api('/me/friends', function (response) {
-    	var friendList = response.data;
+    FB.api('/me?fields=friends.fields(gender,id,name)', function (response) {
+      var friendList = response.friends.data;
 
     	for (var i = 0; i < friendList.length; i++) {
+
+        if(friendList[i].gender == "male"){
+          maleFriends[maleFriends.length] = friendList[i];
+        } else {
+          femaleFriends[femaleFriends.length] = friendList[i];        
+        }
+
+
     		FB.api('/'+friendList[i].id+'/picture', function (my_response) {
     			var img = document.createElement("img");
     			img.src = "" + my_response.data.url;
 
     			document.getElementById("FriendArray").appendChild(img);
-
   			});
 
     	}
-      var friendindex1 = Math.floor(Math.random() * friendList.length);
-      var friendindex2 = Math.floor(Math.random() * friendList.length);
-      while(friendindex1 == friendindex2) {
-        friendindex2 = Math.floor(Math.random() * friendList.length);
-      }
 
-      uid1 = friendList[friendindex1].id;
-      uid2 = friendList[friendindex2].id;
+      var friendindex1 = Math.floor(Math.random() * maleFriends.length);
+      var friendindex2 = Math.floor(Math.random() * femaleFriends.length);
 
-      document.getElementById("id1").innerHTML = friendList[friendindex1].id;
-      document.getElementById("id2").innerHTML = friendList[friendindex2].id;
-      document.getElementById("name1").innerHTML = friendList[friendindex1].name;
-      document.getElementById("name2").innerHTML = friendList[friendindex2].name;
-      FB.api('/'+friendList[friendindex1].id+'/picture', function (my_response) {
+      uid1 = maleFriends[friendindex1].id;
+      uid2 = femaleFriends[friendindex2].id;
+
+      document.getElementById("id1").innerHTML = uid1;
+      document.getElementById("id2").innerHTML = uid2;
+      document.getElementById("name1").innerHTML = maleFriends[friendindex1].name;
+      document.getElementById("name2").innerHTML = femaleFriends[friendindex2].name;
+      FB.api('/'+maleFriends[friendindex1].id+'/picture', function (my_response) {
           var img = document.createElement("img");
           img.src = "" + my_response.data.url;
           img.setAttribute("style", "height: 100px; width: 100px"); 
           document.getElementById("FBPic1").appendChild(img);
         });
-      FB.api('/'+friendList[friendindex2].id+'/picture', function (my_response) {
+      FB.api('/'+femaleFriends[friendindex2].id+'/picture', function (my_response) {
           var img = document.createElement("img");
           img.src = "" + my_response.data.url;
           img.setAttribute("style", "height: 100px; width: 100px"); 
           document.getElementById("FBPic2").appendChild(img);
         });
+
     });
 
   }
+
 
   function addToMatches() {
     var path = window.location.pathname;
