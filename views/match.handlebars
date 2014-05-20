@@ -100,7 +100,7 @@ function statusChangeCallback(response) {
     	var friendList = response.data;
 
     	for (var i = 0; i < friendList.length; i++) {
-    		FB.api('/'+friendList[i].id+'/picture', function (my_response) {
+    		FB.api('/'+friendList[i].id+'/picture?type=square', function (my_response) {
     			var img = document.createElement("img");
     			img.src = "" + my_response.data.url;
 
@@ -122,16 +122,16 @@ function statusChangeCallback(response) {
       document.getElementById("id2").innerHTML = friendList[friendindex2].id;
       document.getElementById("name1").innerHTML = friendList[friendindex1].name;
       document.getElementById("name2").innerHTML = friendList[friendindex2].name;
-      FB.api('/'+friendList[friendindex1].id+'/picture', function (my_response) {
+      FB.api('/'+friendList[friendindex1].id+'/picture?type=large', function (my_response) {
           var img = document.createElement("img");
           img.src = "" + my_response.data.url;
-          img.setAttribute("style", "height: 100px; width: 100px"); 
+          img.setAttribute("style", "height: 150px; width: 150px"); 
           document.getElementById("FBPic1").appendChild(img);
         });
-      FB.api('/'+friendList[friendindex2].id+'/picture', function (my_response) {
+      FB.api('/'+friendList[friendindex2].id+'/picture?type=large', function (my_response) {
           var img = document.createElement("img");
           img.src = "" + my_response.data.url;
-          img.setAttribute("style", "height: 100px; width: 100px"); 
+          img.setAttribute("style", "height: 150px; width: 150px"); 
           document.getElementById("FBPic2").appendChild(img);
         });
     });
@@ -173,14 +173,14 @@ function statusChangeCallback(response) {
 </button>
 <p>Switch to Messages</p>
 </div>
-<div style="height:50px, width:500px;"></div>
+<div style="height:100px, width:500px;"></div>
 <div style="height:500px, width:500px, margin: 30px, display:inline-block;">
   <div style="float:left;">
-    <div id="FBPic1" style="height:100px"></div>
+    <div id="FBPic1" style="height:150px"></div>
     <p id="name1"></p>
   </div>
   <div style="float:right, margin:5px;">
-    <div id="FBPic2" style="height:100px"></div>
+    <div id="FBPic2" style="height:150px"></div>
     <p id="name2"></p>
   </div>
 </div>
