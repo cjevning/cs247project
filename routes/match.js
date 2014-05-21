@@ -3,14 +3,26 @@ var models = require('../models');
 exports.match = function(req,res)
 {
 	req.session.uid = req.params.uid;
-	res.render('match');
+	var seen = [];
+	var splits = req.session.uid.split("=");
+    var loggedIn = splits[1];
+	var g = models.NoMatch.find({"recommender": loggedIn}).exec(afterQuery);
+	function afterQuery(err, results) {
+		if(err) { console.log(err); res.send(500); }
+		var len = results.length;
+		for (var i = 0; i < len; i++) {
+			var r = results[i];
+			var m = {"uid1": r.uid1, "uid2": r.uid2};
+			seen.push(m);
+		}
+		res.render('match', { 'seen': seen });
+	}
 }
 
 exports.good = function(req, res) {
 	var uid1 = req.params.uid1;
 	var uid2 = req.params.uid2;
 	var rec = req.params.recommender;
-	//{"uid1": uid1, "uid2": uid2}
 	var l = models.Match.find({"uid1": uid1, "uid2": uid2}).exec(addToArray);
 	function addToArray(err, toAdd) {
 		if(err) { console.log(err); res.send(500); }
@@ -23,13 +35,22 @@ exports.good = function(req, res) {
 			toAdd[0].save(afterS);
 		    function afterS (err, t) {
 		    	if(err) console.log(err);
-		    	res.send();
+				var newNoMatch = new models.NoMatch({
+				    "uid1": uid1,
+				    "uid2": uid2,
+				    "recommender": rec,
+				});
+				newNoMatch.save(afterSave);
+				function afterSave(err, resu) {	
+				    if(err) console.log(err);
+				    res.send();
+				}	
 		    }
 		}
 		else {
 			var m = models.Match.find({"uid1": uid2, "uid2": uid1}).exec(addToArray2);
 			function addToArray2(err, toAdd2) {
-				if(err) console.log(err);
+				if(err) { console.log(err); res.send(500); }
 				if (toAdd2[0]) {
 					var recs = toAdd2[0].recommenders;
 					var oldNum = toAdd2[0].numRecs;
@@ -38,7 +59,16 @@ exports.good = function(req, res) {
 					toAdd2[0].save(afterS);
 				    function afterS (err, t) {
 				    	if(err) console.log(err);
-				    	res.send();
+				    	var newNoMatch = new models.NoMatch({
+						    "uid1": uid1,
+						    "uid2": uid2,
+						    "recommender": rec,
+						});
+						newNoMatch.save(afterSave);
+						function afterSave(err, resu) {	
+						    if(err) console.log(err);
+						    res.send();
+						}	
 				    }
 				}
 				else {
@@ -51,8 +81,17 @@ exports.good = function(req, res) {
 
 					newMatch.save(afterSave);
 					function afterSave(err, resu) {	
-					    if(err) console.log(err);
-					    res.send();
+					    if(err) { console.log(err); res.send(500); }
+					    var newNoMatch = new models.NoMatch({
+						    "uid1": uid1,
+						    "uid2": uid2,
+						    "recommender": rec,
+						});
+						newNoMatch.save(afterSave);
+						function afterSave(err, resu) {	
+						    if(err) console.log(err);
+						    res.send();
+						}	
 					}
 				}
 			}
@@ -72,7 +111,7 @@ exports.bad = function(req, res) {
 	});
 	newNoMatch.save(afterSave);
 	function afterSave(err, resu) {	
-	    if(err) console.log(err);
+	    if(err) { console.log(err); res.send(500); }
 	    res.send();
 	}	
 }

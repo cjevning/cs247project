@@ -12,6 +12,12 @@
   <script src="/js/bootstrap.min.js"></script>
 
 <script>
+seen = [];
+pairs = [];
+var femaleFriends = [];
+var maleFriends = [];
+
+
 window.onload=function(){
   setTimeout(function(){notify()}, 15000);
 };
@@ -92,63 +98,83 @@ function statusChangeCallback(response) {
   var uid3 = splits[1];
 
   function testAPI() {
-      var femaleFriends = new Array();
-      var maleFriends = new Array();
-
-
-    document.getElementById("FBPic1").innerHTML = "";
-    document.getElementById("FBPic2").innerHTML = "";
-    document.getElementById("FriendArray").innerHTML = "";
+    var x = document.getElementById("matchesSeen").innerHTML;
+    var splits = x.split(/[\s,]+/g)
+    var len = splits.length;
+    for (var i = 1; i < len-1; i+=2) {
+      var obj = {"u1": splits[i], "u2": splits[i+1]}
+      seen.push(obj);
+    }
     FB.api('/me?fields=friends.fields(gender,id,name)', function (response) {
       var friendList = response.friends.data;
 
-    	for (var i = 0; i < friendList.length; i++) {
+      for (var i = 0; i < friendList.length; i++) {
 
         if(friendList[i].gender == "male"){
-          maleFriends[maleFriends.length] = friendList[i];
+          maleFriends.push(friendList[i]);
         } else {
-          femaleFriends[femaleFriends.length] = friendList[i];        
+          femaleFriends.push(friendList[i]);        
         }
+        FB.api('/'+friendList[i].id+'/picture?type=square', function (my_response) {
+          var img = document.createElement("img");
+          img.src = "" + my_response.data.url;
+          document.getElementById("FriendArray").appendChild(img);
+        });
+      }
+      for (var i = 0; i < maleFriends.length; i++) {
+        for (var j = 0; j < femaleFriends.length; j++) {
+          uid1 = maleFriends[i].id;
+          uid2 = femaleFriends[j].id;
 
+          var result = $.grep(seen, function(e){ return (e.u1 == uid1 && e.u2 == uid2); });
+          if (result.length == 0) {
+            var obj = {"index1": i, "index2": j}
+            pairs.push(obj);
+          }
+        }
+      }
+      var counter = pairs.length, temp, index;
+      while (counter > 0) {
+          index = Math.floor(Math.random() * counter);
+          counter--;
+          temp = pairs[counter];
+          pairs[counter] = pairs[index];
+          pairs[index] = temp;
+      }
+      reloadPair();
+    }); 
+  }
 
-    		FB.api('/'+friendList[i].id+'/picture?type=square', function (my_response) {
-    			var img = document.createElement("img");
-    			img.src = "" + my_response.data.url;
-
-    			document.getElementById("FriendArray").appendChild(img);
-  			});
-
-    	}
-<<<<<<< HEAD
-
-      var friendindex1 = Math.floor(Math.random() * maleFriends.length);
-      var friendindex2 = Math.floor(Math.random() * femaleFriends.length);
-
+  function reloadPair() {
+    document.getElementById("FBPic1").innerHTML = "";
+    document.getElementById("FBPic2").innerHTML = "";
+    var pair = pairs.pop();
+    if (pair) {
+      var friendindex1 = pair.index1;
+      var friendindex2 = pair.index2;
       uid1 = maleFriends[friendindex1].id;
       uid2 = femaleFriends[friendindex2].id;
-
       document.getElementById("id1").innerHTML = uid1;
       document.getElementById("id2").innerHTML = uid2;
       document.getElementById("name1").innerHTML = maleFriends[friendindex1].name;
       document.getElementById("name2").innerHTML = femaleFriends[friendindex2].name;
-      FB.api('/'+maleFriends[friendindex1].id+'/picture?type=large', function (my_response) {
+      FB.api('/'+uid1+'/picture?type=large', function (my_response) {
+        var img = document.createElement("img");
+        img.src = "" + my_response.data.url;
+        img.setAttribute("style", "height: 150px; width: 150px"); 
+        document.getElementById("FBPic1").appendChild(img);
+      });
 
-          var img = document.createElement("img");
-          img.src = "" + my_response.data.url;
-          img.setAttribute("style", "height: 150px; width: 150px"); 
-          document.getElementById("FBPic1").appendChild(img);
-        });
-
-      FB.api('/'+femaleFriends[friendindex2].id+'/picture?type=large', function (my_response) {
-
-          var img = document.createElement("img");
-          img.src = "" + my_response.data.url;
-          img.setAttribute("style", "height: 150px; width: 150px"); 
-          document.getElementById("FBPic2").appendChild(img);
-        });
-
-    });
-
+      FB.api('/'+uid2+'/picture?type=large', function (my_response) {
+        var img = document.createElement("img");
+        img.src = "" + my_response.data.url;
+        img.setAttribute("style", "height: 150px; width: 150px"); 
+        document.getElementById("FBPic2").appendChild(img);
+      });
+    }
+    else {
+      document.getElementById("FBPic1").innerHTML = "You win!";
+    }
   }
 
 
@@ -158,8 +184,10 @@ function statusChangeCallback(response) {
     var loggedIn = splits[1];
     var uid1 = document.getElementById("id1").innerHTML;
     var uid2 = document.getElementById("id2").innerHTML;
+    var obj = {"u1": uid1, "u2": uid2}
+    seen.push(obj);
     var url_call = "/match/"+uid1+"/"+uid2+"/"+loggedIn+"/good";
-    testAPI();
+    reloadPair();
     $.post(url_call);
   }
 
@@ -169,8 +197,10 @@ function statusChangeCallback(response) {
     var loggedIn = splits[1];
     var uid1 = document.getElementById("id1").innerHTML;
     var uid2 = document.getElementById("id2").innerHTML;
+    var obj = {"u1": uid1, "u2": uid2}
+    seen.push(obj);
     var url_call = "/match/"+uid1+"/"+uid2+"/"+loggedIn+"/bad";
-    testAPI();
+    reloadPair();
     $.post(url_call);
   }
 
@@ -224,6 +254,10 @@ function statusChangeCallback(response) {
 <br/>
 <p>Friends using SetEmUp:</p>
 <div id="FriendArray"></div>
-
+<div id="matchesSeen" class="hidden">
+  {{#each seen}}
+    {{uid1}},{{uid2}}
+  {{/each}}
+</div>
 </body>
 </html>

@@ -35,6 +35,14 @@ models.Match
 // Step 3: load the data from the JSON file
 function onceClear(err) {
   if(err) console.log(err);
-  console.log("done");
+  models.NoMatch
+  .find()
+  .remove()
+  .exec(onceClear2);
+  console.log("done1");
 }
 
+function onceClear2(err) {
+  if(err) console.log(err);
+  console.log("done2");
+}
