@@ -73,6 +73,8 @@ exports.goodorder = function(req,res)
 		if (len < 1) {
 			res.json({"good": false, "id": match, "user": user});
 		}
-		res.json({"good": true, "id": match, "user": user});
+		else {
+			res.json({"good": true, "id": match, "user": user});
+		}
 	}
 }
