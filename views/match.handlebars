@@ -42,12 +42,15 @@ function notifyUser(result) {
     var loggedIn = splits[1];
     var url_call = "/match/notificationSeen/" + loggedIn + "/" + id;
     $.post(url_call);
+    notify();
   }
 }
 
 function notify () {
   var not = document.getElementById("notification");
   not.style.display = 'inline-block';
+  var text = document.getElementById("messagesText");
+  text.innerHTML = "You have a new match!";
 }
 
 function statusChangeCallback(response) {
@@ -238,7 +241,7 @@ function statusChangeCallback(response) {
 <button type="button" id="notification" class="btn btn-default" onclick="toMessagePage()" style="display:none">
   <span> <i class="fa fa-smile-o fa-5x"></i></span>
 </button>
-<p>Switch to Messages</p>
+<p id="messagesText">Switch to Messages</p>
 </div>
 <div style="height:100px, width:500px;"></div>
 <div style="height:500px, width:500px, margin: 30px, display:inline-block;">
