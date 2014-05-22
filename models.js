@@ -14,5 +14,12 @@ var NoMatchSchema = new Mongoose.Schema({
 	"recommender": String,
 });
 
+var NotificationSchema = new Mongoose.Schema({
+	"uid": String,
+	"type": String,
+	"seen": Boolean,
+});
+
 exports.Match = Mongoose.model('Match', MatchSchema);
 exports.NoMatch = Mongoose.model('NoMatch', NoMatchSchema);
+exports.Notification = Mongoose.model('Notification', NotificationSchema);

@@ -19,8 +19,35 @@ var maleFriends = [];
 
 
 window.onload=function(){
-  setTimeout(function(){notify()}, 15000);
+  //setTimeout(function(){notify()}, 15000);
 };
+
+window.setInterval(function(){
+  checkForNotifications();
+}, 15000);
+
+function checkForNotifications() {
+  var path = window.location.pathname;
+  var splits = path.split("=");
+  var loggedIn = splits[1];
+  var url_call = "/match/checkNotifications/" + loggedIn;
+  $.get(url_call, notifyUser);
+}
+
+function notifyUser(result) {
+  if (result['notifications']) {
+    id = result['id'];
+    var path = window.location.pathname;
+    var splits = path.split("=");
+    var loggedIn = splits[1];
+    console.log(id);
+    var url_call = "/match/notificationSeen/" + loggedIn + "/" + id;
+    $.post(url_call);
+  }
+  
+  
+  alert(result['notifications']);
+}
 
 function notify () {
   var not = document.getElementById("notification");
