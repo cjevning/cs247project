@@ -40,13 +40,9 @@ function notifyUser(result) {
     var path = window.location.pathname;
     var splits = path.split("=");
     var loggedIn = splits[1];
-    console.log(id);
     var url_call = "/match/notificationSeen/" + loggedIn + "/" + id;
     $.post(url_call);
   }
-  
-  
-  alert(result['notifications']);
 }
 
 function notify () {
