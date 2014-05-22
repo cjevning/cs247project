@@ -202,15 +202,25 @@ function goBack(){
       var video = document.createElement("video");
       video.autoplay = true;
       video.controls = true; // optional
-      video.loop = true;
+      video.loop = false;
       video.width = 200;
+
+      // var audio = document.createElement("audio");
+      // audio.autoplay = true;
+      // audio.loop = false;
 
       var source = document.createElement("source");
       source.src =  URL.createObjectURL(base64_to_blob(data.v));
       source.type =  "video/webm";
 
+      // var audSource = document.createElement("source");
+      // audSource.src =  URL.createObjectURL(base64_to_blob(data.v));
+      // audSource.type =  "audio/mpeg";
+
       video.appendChild(source);
+      // audio.appendChild(audSource);
       wrapper.appendChild(video);
+      // wrapper.appendChild(audio);
 
 
       var conversationEl = document.getElementById("conversation");
@@ -241,17 +251,22 @@ function goBack(){
       var video_height= 120;
       var webcam_stream = document.getElementById('webcam_stream');
       var video = document.createElement('video');
-      var audio = document.createElement('audio');
+  
+
       webcam_stream.innerHTML = "";
       // adds these properties to the video
       video = mergeProps(video, {
           controls: true,
           width: video_width,
           height: video_height,
-          src: URL.createObjectURL(stream)
+          src: URL.createObjectURL(stream),
+          muted: true
       });
+
+   
       video.play();
       webcam_stream.appendChild(video);
+
 
       // counter
       var time = 0;
@@ -359,8 +374,6 @@ function goBack(){
   <div id="video_container"></div>
 
 
-<input onclick="startRecording()" type="button" value="start recording" />
-    <input onclick="stopRecording()" type="button" value="stop recording and play" />
 
 </body>
 </html>

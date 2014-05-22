@@ -83,6 +83,7 @@ function statusChangeCallback(response) {
       statusChangeCallback(response);
     });
   }
+
    window.fbAsyncInit = function() {
   FB.init({
     appId      : '284519508381624',
@@ -174,6 +175,8 @@ function statusChangeCallback(response) {
   function reloadPair() {
     document.getElementById("FBPic1").innerHTML = "";
     document.getElementById("FBPic2").innerHTML = "";
+    document.getElementById("name1").innerHTML = "";
+    document.getElementById("name2").innerHTML = "";
     var pair = pairs.pop();
     if (pair) {
       var friendindex1 = pair.index1;
@@ -199,7 +202,7 @@ function statusChangeCallback(response) {
       });
     }
     else {
-      document.getElementById("FBPic1").innerHTML = "You win!";
+      document.getElementById("FBPic1").innerHTML = "<h3>You have seen every possible pair! Tell your friends to join the app so you can make more recommendations!<h3>";
     }
   }
 
