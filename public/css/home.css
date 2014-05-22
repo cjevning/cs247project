@@ -25,3 +25,19 @@ hr {
     display: block;
     visibility: visible;
 }
+
+.matchlink {
+    color: blue;
+    text-align: center;
+    font-size: 200%;
+    border-style: groove;
+    border-width: 5px;
+}
+
+.centertext {
+    text-align: center;
+}
+
+.visibleimage {
+    visibility: visible;
+}
