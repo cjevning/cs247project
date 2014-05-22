@@ -126,7 +126,21 @@
       var path = window.location.pathname;
       var splits = path.split("/");
       var loggedIn = splits[splits.length-1];
-      var url = "/message/" + loggedIn + "/" + id;
+      var url = "/message/goodorder/" + loggedIn + "/" + id;
+      var good = $.get(url, sendoff);
+    }
+
+    function sendoff(result) {
+      var good = result['good'];
+      var user = result['user'];
+      var match = result['id'];
+      var url = "/message/";
+      if (good) {
+        url += user + "/" + match;
+      }
+      else {
+        url += match + "/" + user;
+      }
       window.location.href = url;
     }
   </script>  

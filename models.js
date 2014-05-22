@@ -14,6 +14,12 @@ var NoMatchSchema = new Mongoose.Schema({
 	"recommender": String,
 });
 
+var ChatroomSchema = new Mongoose.Schema({
+	"uid1": String,
+	"uid2": String, 
+	"chatroom": String,
+});
+
 var NotificationSchema = new Mongoose.Schema({
 	"uid": String,
 	"type": String,
@@ -22,4 +28,5 @@ var NotificationSchema = new Mongoose.Schema({
 
 exports.Match = Mongoose.model('Match', MatchSchema);
 exports.NoMatch = Mongoose.model('NoMatch', NoMatchSchema);
+exports.Chatroom = Mongoose.model('Chatroom', ChatroomSchema);
 exports.Notification = Mongoose.model('Notification', NotificationSchema);

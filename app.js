@@ -57,6 +57,7 @@ app.get('/match/checkNotifications/:user', match.check);
 app.post('/match/notificationSeen/:user/:id', match.seen);
 app.get('/message/all/:id', message.allMessages);
 app.get('/message/:user/:match', message.message);
+app.get('/message/goodorder/:user/:match', message.goodorder);
 app.get('/home',home.viewHome);
 app.get('/requirement/:requirement',requirement.viewRequirementAlternate);
 app.get('/requirement/:requirement/alternate',requirement.viewRequirementAlternate);

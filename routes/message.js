@@ -9,8 +9,8 @@ exports.message = function(req,res)
 	function addToArray(err, results) {
 		var len = results.length;
 		if (len < 1) {
-			var a = models.Match.find({"uid1": user, "uid2": match}).exec(addToArray2);
-			function addToArray(err, resu) {
+			var a = models.Match.find({"uid1": match, "uid2": user}).exec(addToArray2);
+			function addToArray2(err, resu) {
 				var match = resu[0];
 				var allthem = match.recommenders;
 				var splits = allthem.split(",");
@@ -58,5 +58,19 @@ exports.allMessages = function(req,res)
 			}
 			res.render('allmessages', {'matches': all});
 		}
+	}
+}
+
+exports.goodorder = function(req,res)
+{
+	var user = req.params.user;
+	var match = req.params.match;
+	var b = models.Match.find({"uid1": user, "uid2": match}).exec(addToArray);
+	function addToArray(err, results) {
+		var len = results.length;
+		if (len < 1) {
+			res.json({"good": false, "id": match, "user": user});
+		}
+		res.json({"good": true, "id": match, "user": user});
 	}
 }
