@@ -11,9 +11,8 @@
   <script src="https://code.jquery.com/jquery.js"></script>
   <script src="/js/bootstrap.min.js"></script>
   <script src="http://www.WebRTC-Experiment.com/RecordRTC.js"></script>
-    <script src='/js/MediaStreamRecorder.js'></script>
-        <script src='https://cdn.firebase.com/js/client/1.0.6/firebase.js'></script>
-
+  <script src='/js/MediaStreamRecorder.js'></script>
+  <script src='https://cdn.firebase.com/js/client/1.0.6/firebase.js'></script>
 </head>
 <body>
 	
@@ -89,8 +88,8 @@ function statusChangeCallback(response) {
   var pathname = window.location.pathname;
   var splits = pathname.split("&");
   var curr_user = splits[3]; // Because currently the texter is the person who hit like
-  var my_match = '/' +splits[1] + '/';
-  var matcher = '/' + splits[2] + '/';
+  var my_match = '/' +splits[2] + '/';
+  var matcher = '/' + splits[1] + '/';
   var my_match_name;
 
   function testAPI() {
@@ -123,7 +122,6 @@ function goBack(){
 
   var cur_video_blob = null;
   var fb_instance;
-    //var userVideos;
 
   $(document).ready(function(){
     connect_to_chat_firebase();
@@ -148,7 +146,6 @@ function goBack(){
     var fb_instance_users = fb_new_chat_room.child('users');
     var fb_instance_stream = fb_new_chat_room.child('stream');
     var my_color = "#"+((1<<23) + ((1<<23)*Math.random()|0)).toString(16);
-    //userVideos = {};
 
 
     // listen to events
@@ -159,11 +156,7 @@ function goBack(){
       display_msg(snapshot.val());
     });
 
-    // block until username is answered
-    // var username = window.prompt("Welcome, warrior! please declare your name?");
-    // if(!username){
-    //   username = "anonymous"+Math.floor(Math.random()*1111);
-    // }
+
     var username = "steve";
     fb_instance_users.push({ name: username,c: my_color});
     $("#waiting").remove();
@@ -291,10 +284,11 @@ function goBack(){
             cur_video_blob = b64_data;
           });
       };
-      setInterval( function() {
-        mediaRecorder.stop();
-        mediaRecorder.start(3000);
-      }, 3000 );
+       mediaRecorder.start(3000);
+      // setInterval( function() {
+      //   mediaRecorder.stop();
+      //   mediaRecorder.start(3000);
+      // }, 3000 );
       console.log("connect to media stream!");
     }
 
@@ -364,8 +358,9 @@ function goBack(){
 
 <!-- <div><h4> FireBase One..</h4></div> -->
 
+
   <div id="waiting">Connecting to chat server...</div>
-  <!-- <div id="second_counter"></div> -->
+
   <div id="conversation"></div>
   <div id="submission">
     <input type="text" placeholder="say something..">

@@ -52,15 +52,27 @@ function onceClear2(err) {
 }
 
 function onceClear3(err) {
-  var match = new models.Match({"uid1": "10152423734788293", "uid2": "33333333", "recommender": "hello", "numRecs": 5});
-  match.save(function(err, proj) {
-    if(err) console.log(err);
-    console.log("done3");
-    var not = new models.Notification({"uid": "10152423734788293", "type": "match", "seen": false})
-    not.save(function(err, proj) {
-      if(err) console.log(err);
-      console.log("done4");
-      mongoose.connection.close();
+  var match2 = new models.Match({"uid1": "10152423734788293", "uid2": "10203898213240590", "recommenders": "hello,hi,conner,kennan,jordan", "numRecs": 5});
+  match2.save(function(err, proj) {
+    var match3 = new models.Match({"uid1": "10152423734788293", "uid2": "637148899698075", "recommenders": "hello,hi,conner,kennan,jordan", "numRecs": 5});
+    match3.save(function(err, proj) {
+      var match4 = new models.Match({"uid1": "10152423734788293", "uid2": "10152002738066150", "recommenders": "hello,hi,conner,kennan,jordan", "numRecs": 5});
+      match4.save(function(err, proj) {
+          var match = new models.Match({"uid1": "10152423734788293", "uid2": "696436097061985", "recommenders": "hello,hi,conner,kennan,jordan", "numRecs": 5});
+          match.save(function(err, proj) {
+          if(err) console.log(err);
+          console.log("done3");
+          var not = new models.Notification({"uid": "10152423734788293", "type": "match", "seen": false})
+          not.save(function(err, proj) {
+            if(err) console.log(err);
+            console.log("done4");
+            mongoose.connection.close();
+          });
+        });
+      });
     });
   });
+  
+  
+  
 }

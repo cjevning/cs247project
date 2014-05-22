@@ -234,7 +234,10 @@ function statusChangeCallback(response) {
   }
 
   function toMessagePage(){
-  	window.location.href = "/message/&" + uid1 + "&" + uid2 + "&" + uid3;
+    var path = window.location.pathname;
+    var splits = path.split("=");
+    var loggedIn = splits[1];
+  	window.location.href = "/message/all/" + loggedIn;
   }
 
 </script>
