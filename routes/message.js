@@ -56,7 +56,7 @@ exports.allMessages = function(req,res)
 			for (var j = 0; j < leng; j++) {
 				all.push({"user": id, "match": resu[j].uid1});
 			}
-			res.render('allMessages', {'matches': all});
+			res.render('allmessages', {'matches': all});
 		}
 	}
 }
