@@ -124,9 +124,18 @@
 
   }
   </script>
+  <script type="text/javascript">
+    function gotomessage(id) {
+      var path = window.location.pathname;
+      var splits = path.split("/");
+      var loggedIn = splits[splits.length-1];
+      var url = "/message/" + loggedIn + "/" + id;
+      window.location.href = url;
+    }
+  </script>
  <div id="matchList" class="ourhidden">
 {{#each matches}}
-  <div id="{{match}}" onclick="gotomessage(\'{{match}}\')" class="nothidden"></div>
+  <div id="{{match}}" onclick="gotomessage('{{match}}')" class="nothidden"></div>
   
   |{{match}}|
   
