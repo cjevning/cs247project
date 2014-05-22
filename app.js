@@ -56,6 +56,7 @@ app.post('/match/:uid1/:uid2/:recommender/bad', match.bad);
 app.get('/match/checkNotifications/:user', match.check);
 app.post('/match/notificationSeen/:user/:id', match.seen);
 app.get('/message/all/:id', message.allMessages);
+app.get('/message/all/:user/:match', message.message);
 app.get('/message/:uid1&:uid2&:uid3', message.message);
 app.get('/home',home.viewHome);
 app.get('/requirement/:requirement',requirement.viewRequirementAlternate);
