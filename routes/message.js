@@ -2,9 +2,40 @@ var models = require('../models');
 
 exports.message = function(req,res)
 {
-	req.session.uid = req.params.uid1;
-	var l = models.Notification.find({"uid": req.session.uid}).remove();
-	res.render('message');
+	var user = req.params.user;
+	var match = req.params.match;
+	var l = models.Notification.find({"uid": user}).remove();
+	var b = models.Match.find({"uid1": user, "uid2": match}).exec(addToArray);
+	function addToArray(err, results) {
+		var len = results.length;
+		if (len < 1) {
+			var a = models.Match.find({"uid1": user, "uid2": match}).exec(addToArray2);
+			function addToArray(err, resu) {
+				var match = resu[0];
+				var allthem = match.recommenders;
+				var splits = allthem.split(",");
+				var recommenders = "";
+				for (var i = 0; i < splits.length-1; i++) {
+					recommenders += splits[i];
+					recommenders += ", ";
+				}
+				recommenders += "and ";
+				recommenders += splits[splits.length-1];
+				res.render('message', {'recommenders': recommenders});
+			}
+		}
+		var match = results[0];
+		var allthem = match.recommenders;
+		var splits = allthem.split(",");
+		var recommenders = "";
+		for (var i = 0; i < splits.length-1; i++) {
+			recommenders += splits[i];
+			recommenders += ", ";
+		}
+		recommenders += "and ";
+		recommenders += splits[splits.length-1];
+		res.render('message', {'recommenders': recommenders});
+	}
 }
 
 exports.allMessages = function(req,res)

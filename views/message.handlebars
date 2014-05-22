@@ -93,32 +93,22 @@ function statusChangeCallback(response) {
   var my_match_name;
 
   function testAPI() {
-    FB.api(my_match, function (response) {
-      my_match_name = response.first_name;
-  });
-    FB.api('/me/', function (response) {
-    	username = response.first_name;
-	});
-    FB.api(matcher, function (response) {
-      setTimeout(function(){      
-        var matcher_name = response.first_name + " " + response.last_name;
-      $("#match span").html(matcher_name + " has matched you with " + my_match_name + "!");}, 300);
-  });
-}
+    var recs = document.getElementById("recommenders").innerHTML;
+    var pathname = window.location.pathname;
+    var splits = pathname.split("/");
+    var user = splits[splits.length-2];
+    var match = splits[splits.length-1];
+    FB.api('/' + match + '/', function (response) {
+      my_match_name = response.name;
+      FB.api('/me/', function (response) {
+        username = response.name;
+        $("#match span").html(recs + " have matched you with " + my_match_name + "!");
+        ///////////////////////////
 
 
 
-function send() {
-	var newtext = '\n'+ username + ": " + document.myform.addText.value;
-	document.myform.conversation.value += newtext;
-}
 
-function goBack(){
-	window.location.href = "/match/user=" + curr_user;
-}
-
-
-(function() {
+        (function() {
 
   var cur_video_blob = null;
   var fb_instance;
@@ -139,7 +129,7 @@ function goBack(){
     }else{
       fb_chat_room_id = Math.random().toString(36).substring(7);
     }
-    display_msg({m:"Share this url with your friend to join this chat: "+ document.location.origin+"/#"+fb_chat_room_id,c:"red"})
+    //display_msg({m:"Share this url with your friend to join this chat: "+ document.location.origin+"/#"+fb_chat_room_id,c:"red"})
 
     // set up variables to access firebase data structure
     var fb_new_chat_room = fb_instance.child('chatrooms').child(fb_chat_room_id);
@@ -150,14 +140,14 @@ function goBack(){
 
     // listen to events
     fb_instance_users.on("child_added",function(snapshot){
-      display_msg({m:snapshot.val().name+" joined the room",c: snapshot.val().c});
+      //display_msg({m:snapshot.val().name+" joined the room",c: snapshot.val().c});
     });
     fb_instance_stream.on("child_added",function(snapshot){
       display_msg(snapshot.val());
     });
 
 
-    var username = "steve";
+    
     fb_instance_users.push({ name: username,c: my_color});
     $("#waiting").remove();
 
@@ -336,13 +326,44 @@ function goBack(){
 
 })();
 
+
+
+
+
+
+
+
+
+
+        //////////////////////////
+     });
+    });
+    
+    
+}
+
+
+
+function send() {
+	var newtext = '\n'+ username + ": " + document.myform.addText.value;
+	document.myform.conversation.value += newtext;
+}
+
+function goBack(){
+	window.location.href = "/match/user=" + curr_user;
+}
+
+
+
+
 </script>
-
-<!-- <form name="myform">
+<!--
+ <form name="myform">
+ -->
   <div>
-    <h2 id="match">Congratulations <span></span></h2>
+    <h2 id="match">Congratulations! <span></span></h2>
   </div>
-
+<!--
 	<div>
 		<textarea name="conversation" rows="15" cols="50" readonly>Start messaging now!
 		</textarea>
@@ -367,7 +388,9 @@ function goBack(){
   </div>
   <div id="webcam_stream"></div>
   <div id="video_container"></div>
-
+  <div id="recommenders" class="hidden">
+    {{recommenders}}
+  </div>
 
 
 </body>
