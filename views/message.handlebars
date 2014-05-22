@@ -17,6 +17,8 @@
 </head>
 <body>
 	
+
+
 <script>
   var username;
 
@@ -185,26 +187,23 @@ function goBack(){
 
   // creates a message node and appends it to the conversation
   function display_msg(data){
+  if (data.m) {
+      $("#conversation").append("<div class='msg' style='color:"+data.c+"'>"+data.m+"</div>");
+      var conversationEl = document.getElementById("conversation");
+      conversationEl.scrollTop = conversationEl.scrollHeight;
+    }
   if(data.v){
       var wrapper = document.createElement("div");
 
       wrapper.setAttribute("style", "display:inline; position:relative");
 
-      var msg = document.createElement("p");
-      var txt = document.createTextNode(data.m);
-      msg.appendChild(txt);
-      msg.setAttribute("style", "position:absolute; left: 2px; background-color: black; opacity: .7; bottom:-15px; color:" + data.c);
-      //msg.setAttribute("style", "display: inline;");// margin-left: -100px; margin-top: -200px; padding-right: 100px;");
-
 
       // for video element
       var video = document.createElement("video");
       video.autoplay = true;
-      video.controls = false; // optional
+      video.controls = true; // optional
       video.loop = true;
       video.width = 200;
-      video.setAttribute("style", "z-index: -1;");
-
 
       var source = document.createElement("source");
       source.src =  URL.createObjectURL(base64_to_blob(data.v));
@@ -212,21 +211,13 @@ function goBack(){
 
       video.appendChild(source);
       wrapper.appendChild(video);
-      wrapper.appendChild(msg);
+
 
       var conversationEl = document.getElementById("conversation");
       conversationEl.scrollTop = conversationEl.scrollHeight;
 
-      // for gif instead, use this code below and change mediaRecorder.mimeType in onMediaSuccess below
-      // var video = document.createElement("img");
-      // video.src = URL.createObjectURL(base64_to_blob(data.v));
-
-      // document.getElementById("conversation").appendChild(video);
-      // document.getElementById("conversation").appendChild(msg);
     document.getElementById("conversation").appendChild(wrapper);
-    } else {
-      $("#conversation").append("<div class='msg' style='color:"+data.c+"'>"+data.m+"</div>");
-    }
+    } 
   }
 
   function scroll_to_bottom(wait_time){
@@ -250,10 +241,11 @@ function goBack(){
       var video_height= 120;
       var webcam_stream = document.getElementById('webcam_stream');
       var video = document.createElement('video');
+      var audio = document.createElement('audio');
       webcam_stream.innerHTML = "";
       // adds these properties to the video
       video = mergeProps(video, {
-          controls: false,
+          controls: true,
           width: video_width,
           height: video_height,
           src: URL.createObjectURL(stream)
@@ -263,10 +255,6 @@ function goBack(){
 
       // counter
       var time = 0;
-      // var second_counter = document.getElementById('second_counter');
-      // var second_counter_update = setInterval(function(){
-      //   second_counter.innerHTML = time++;
-      // },1000);
 
       // now record stream in 5 seconds interval
       var video_container = document.getElementById('video_container');
@@ -370,6 +358,9 @@ function goBack(){
   <div id="webcam_stream"></div>
   <div id="video_container"></div>
 
+
+<input onclick="startRecording()" type="button" value="start recording" />
+    <input onclick="stopRecording()" type="button" value="stop recording and play" />
 
 </body>
 </html>
