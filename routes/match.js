@@ -42,8 +42,28 @@ exports.good = function(req, res) {
 				});
 				newNoMatch.save(afterSave);
 				function afterSave(err, resu) {	
-				    if(err) console.log(err);
-				    res.send();
+				    if(err) { console.log(err); res.send(500); }
+				    if (toAdd[0].numRecs == 5) {
+						var newNot = new models.Notification({
+							"uid": uid1,
+							"type": "match",
+							"seen": false,
+						});
+						newNot.save(aSave);
+						function aSave(err, resul) {
+							if(err) { console.log(err); res.send(500); }
+							var newNot = new models.Notification({
+								"uid": uid2,
+								"type": "match",
+								"seen": false,
+							});
+							newNot2.save(aS);
+							function aS(err, re) {
+								if(err) { console.log(err); res.send(500); }
+								res.send();
+							}
+						}
+					}
 				}	
 		    }
 		}
@@ -58,7 +78,7 @@ exports.good = function(req, res) {
 					toAdd2[0].numRecs = oldNum++;
 					toAdd2[0].save(afterS);
 				    function afterS (err, t) {
-				    	if(err) console.log(err);
+				    	if(err) { console.log(err); res.send(500); }
 				    	var newNoMatch = new models.NoMatch({
 						    "uid1": uid1,
 						    "uid2": uid2,
@@ -66,8 +86,28 @@ exports.good = function(req, res) {
 						});
 						newNoMatch.save(afterSave);
 						function afterSave(err, resu) {	
-						    if(err) console.log(err);
-						    res.send();
+						    if(err) { console.log(err); res.send(500); }
+						    if (toAdd[0].numRecs == 5) {
+								var newNot = new models.Notification({
+									"uid": uid1,
+									"type": "match",
+									"seen": false,
+								});
+								newNot.save(aSave);
+								function aSave(err, resul) {
+									if(err) { console.log(err); res.send(500); }
+									var newNot = new models.Notification({
+										"uid": uid2,
+										"type": "match",
+										"seen": false,
+									});
+									newNot2.save(aS);
+									function aS(err, re) {
+										if(err) { console.log(err); res.send(500); }
+										res.send();
+									}
+								}
+							}
 						}	
 				    }
 				}
@@ -89,7 +129,7 @@ exports.good = function(req, res) {
 						});
 						newNoMatch.save(afterSave);
 						function afterSave(err, resu) {	
-						    if(err) console.log(err);
+						    if(err) { console.log(err); res.send(500); }
 						    res.send();
 						}	
 					}
@@ -114,4 +154,27 @@ exports.bad = function(req, res) {
 	    if(err) { console.log(err); res.send(500); }
 	    res.send();
 	}	
+}
+
+exports.check = function(req, res) {
+	var user = req.params.user;
+	var l = models.Notification.find({"uid": user, "seen": false}).exec(addToArray);
+	function addToArray(err, results) {
+		if(err) { console.log(err); res.send(500); }
+		if (results[0]) {
+			res.json({"notifications": true, "id": results[0]._id});
+		}
+		else res.json({"notifications": false});
+	}
+}
+
+exports.seen = function(req, res) {
+	var user = req.params.user;
+	console.log("fucking a");
+	var id = req.params.id;
+	var l = models.Notification.update({"uid": user, "_id": id},{"seen": true}).exec(addToArray);
+	function addToArray(err, results) {
+		if(err) { console.log(err); res.send(500); }
+		res.send();
+	}
 }
