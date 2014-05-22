@@ -16,3 +16,12 @@ hr {
 	background-color: yellow;
 	text-align: center;
 }
+
+.ourhidden {
+    visibility: hidden;
+}
+
+.nothidden {
+    display: block;
+    visibility: visible;
+}

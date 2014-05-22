@@ -16,11 +16,11 @@
 
 </head>
 <body>
-
+  
   <script>
   var username;
 
-function statusChangeCallback(response) {
+  function statusChangeCallback(response) {
     console.log('statusChangeCallback');
     console.log(response);
     // The response object is returned with a status field that lets the
@@ -87,6 +87,24 @@ function statusChangeCallback(response) {
   
 
   function testAPI() {
+  var x = document.getElementById("matchList").innerHTML;
+    var splits = x.split(/[|]+/g)
+    var len = splits.length;
+    for (var i = 1; i < len-1; i+=2) {
+      var obj = {"u1": splits[i]}
+      console.log(obj);
+      var linkToChat = document.createElement("div");
+      var firstName = "";
+      FB.api('/' + obj.u1 + '/', function (response) {
+        firstName = response.first_name;
+        document.getElementById(response.id).innerHTML = firstName;  
+        console.log(firstName);
+      });
+      document.getElementById("matchList").appendChild(linkToChat); 
+  }
+
+
+
   //   FB.api(my_match, function (response) {
   //     my_match_name = response.first_name;
   // });
@@ -98,16 +116,22 @@ function statusChangeCallback(response) {
   //       var matcher_name = response.first_name + " " + response.last_name;
   //     $("#match span").html(matcher_name + " has matched you with " + my_match_name + "!");}, 300);
   // });
-}
 
+ 
+  
+  // 
+  
+
+  }
+  </script>
+ <div id="matchList" class="ourhidden">
 {{#each matches}}
-
-<script>
-console.log("match");
-</script>
-  {{match}}
-  {{user}}
+  <div id="{{match}}" onclick="gotomessage(\'{{match}}\')" class="nothidden"></div>
+  
+  |{{match}}|
+  
 {{/each}}
+</div>
 
 </body>
 </html>
