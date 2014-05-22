@@ -24,17 +24,19 @@ exports.message = function(req,res)
 				res.render('message', {'recommenders': recommenders});
 			}
 		}
-		var match = results[0];
-		var allthem = match.recommenders;
-		var splits = allthem.split(",");
-		var recommenders = "";
-		for (var i = 0; i < splits.length-1; i++) {
-			recommenders += splits[i];
-			recommenders += ", ";
+		else {
+			var match = results[0];
+			var allthem = match.recommenders;
+			var splits = allthem.split(",");
+			var recommenders = "";
+			for (var i = 0; i < splits.length-1; i++) {
+				recommenders += splits[i];
+				recommenders += ", ";
+			}
+			recommenders += "and ";
+			recommenders += splits[splits.length-1];
+			res.render('message', {'recommenders': recommenders});
 		}
-		recommenders += "and ";
-		recommenders += splits[splits.length-1];
-		res.render('message', {'recommenders': recommenders});
 	}
 }
 
