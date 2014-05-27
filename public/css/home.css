@@ -24,6 +24,7 @@ hr {
 .nothidden {
     display: block;
     visibility: visible;
+    cursor: pointer;
 }
 
 .matchlink {
