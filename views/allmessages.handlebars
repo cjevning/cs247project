@@ -11,18 +11,16 @@
   <script src="https://code.jquery.com/jquery.js"></script>
   <script src="/js/bootstrap.min.js"></script>
   <script src="http://www.WebRTC-Experiment.com/RecordRTC.js"></script>
-    <script src='/js/MediaStreamRecorder.js'></script>
-        <script src='https://cdn.firebase.com/js/client/1.0.6/firebase.js'></script>
-
+  <script src='/js/MediaStreamRecorder.js'></script>
+  <script src='https://cdn.firebase.com/js/client/1.0.6/firebase.js'></script>
 </head>
 <body>
   
   <script>
   var username;
-
   function statusChangeCallback(response) {
-    console.log('statusChangeCallback');
-    console.log(response);
+    //console.log('statusChangeCallback');
+    //console.log(response);
     // The response object is returned with a status field that lets the
     // app know the current login status of the person.
     // Full docs on the response object can be found in the documentation
@@ -92,34 +90,27 @@
     var len = splits.length;
     for (var i = 1; i < len-1; i+=2) {
       var obj = {"u1": splits[i]}
-      console.log(obj);
-      var linkToChat = document.createElement("div");
-      var firstName = "";
+      console.log(obj.u1);
       FB.api('/' + obj.u1 + '/', function (response) {
-        name = response.name;
-        document.getElementById(response.id).innerHTML = name;  
-        console.log(name);
-        
+        var htmlName = document.createElement('p');
+        htmlName.innerHTML = response.name;
+        FB.api('/'+response.id+'/picture?type=large', function (resp) {
+          var img = document.createElement("img");
+          img.src = "" + resp.data.url;
+          img.setAttribute("style", "height: 100px; width: 100px"); 
+          img.className = "visibleimage";
+          document.getElementById(response.id).appendChild(img);
+          document.getElementById(response.id).appendChild(htmlName);
+        });
       });
-      FB.api('/'+obj.u1+'/picture?type=large', function (response) {
-        var img = document.createElement("img");
-        img.src = "" + response.data.url;
-        img.setAttribute("style", "height: 150px; width: 150px"); 
-        img.className = "visibleimage";
-        linkToChat.appendChild(img);
-      
-      });
-      document.getElementById("matchList").appendChild(linkToChat); 
-  }
-
+    }
   }
   </script>
-
   <h2 class="centertext">Your Matches!!</h2>
- <div id="matchList" class="ourhidden">
-{{#each matches}}
-  <div id="{{match}}" onclick="gotomessage('{{match}}')" class="nothidden matchlink">
-  </div>
+  <div id="matchList" class="ourhidden">
+  {{#each matches}}
+    <div id="{{match}}" onclick="gotomessage('{{match}}')" class="nothidden matchlink">
+    </div>
 
   <script type="text/javascript">
     function gotomessage(id) {

@@ -20,6 +20,11 @@
 
 <script>
   var username;
+  var currentUserID;
+
+  function goBack(){
+          window.location.href = "/message/all/" + currentUserID;
+  }
 
 function statusChangeCallback(response) {
     console.log('statusChangeCallback');
@@ -87,9 +92,6 @@ function statusChangeCallback(response) {
   
   var pathname = window.location.pathname;
   var splits = pathname.split("&");
-  var curr_user = splits[3]; // Because currently the texter is the person who hit like
-  var my_match = '/' +splits[2] + '/';
-  var matcher = '/' + splits[1] + '/';
   var my_match_name;
 
   function testAPI() {
@@ -98,11 +100,13 @@ function statusChangeCallback(response) {
     var splits = pathname.split("/");
     var user = splits[splits.length-2];
     var match = splits[splits.length-1];
+
     FB.api('/' + match + '/', function (response) {
       my_match_name = response.name;
       FB.api('/me/', function (response1) {
+        currentUserID = response1.id;
         username = response1.name;
-        if(response1.id == response.id){
+        if(currentUserID == response.id){
           FB.api('/' + user + '/', function (response2) {
             my_match_name = response2.name;
             $("#match span").html(recs + " have matched you with " + my_match_name + "!");
@@ -110,6 +114,9 @@ function statusChangeCallback(response) {
         } else {
             $("#match span").html(recs + " have matched you with " + my_match_name + "!");
         }
+
+
+        
 
 
         ///////////////////////////
@@ -146,7 +153,6 @@ $(document).ready(function(){
       $("#stopButton").show();
     };
     $("#stopButton").click(function() {
-      $("#recordBtn").show();
       $("#stopButton").hide();
       var videoBase64;
       var savedVideoURL;
@@ -189,6 +195,7 @@ $(document).ready(function(){
             approveButton.onclick = function() {
               fb_instance_stream.push({m:username, v:videoBase64, a:base64, c: my_color, r: 0, '.priority':0});
               $('#videoplaybackdiv').remove();
+              $("#recordBtn").show();
             }
             $('#videoplaybackdiv').append(approveButton);
 
@@ -196,6 +203,7 @@ $(document).ready(function(){
             rejectButton.innerHTML = "Reject";
             rejectButton.onclick = function() {
               $('#videoplaybackdiv').remove();
+              $("#recordBtn").show();
             }
             $('#videoplaybackdiv').append(rejectButton);
             //add to onclick for accept
@@ -478,9 +486,8 @@ function updatePlay(result) {
      });
     });
     
-    
-}
 
+}
 
 
 function send() {
@@ -488,9 +495,7 @@ function send() {
 	document.myform.conversation.value += newtext;
 }
 
-function goBack(){
-	window.location.href = "/match/user=" + curr_user;
-}
+
 
 
 
@@ -517,11 +522,13 @@ function goBack(){
 </form> -->
 
 <!-- <div><h4> FireBase One..</h4></div> -->
+  <button type="button" onclick="goBack();"> Back </button>
+  
+  <div>
+    <button id="recordBtn">Record</button>
+    <button id="stopButton">Stop</button>
+  </div>
 
-  <button id="recordBtn">Record</button>
-  <button id="stopButton">Stop</button>
-
-  <div id="waiting">Connecting to chat server...</div>
 
   <div id="conversation"></div>
   <div id="submission">
