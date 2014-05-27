@@ -100,9 +100,18 @@ function statusChangeCallback(response) {
     var match = splits[splits.length-1];
     FB.api('/' + match + '/', function (response) {
       my_match_name = response.name;
-      FB.api('/me/', function (response) {
-        username = response.name;
-        $("#match span").html(recs + " have matched you with " + my_match_name + "!");
+      FB.api('/me/', function (response1) {
+        username = response1.name;
+        if(response1.id == response.id){
+          FB.api('/' + user + '/', function (response2) {
+            my_match_name = response2.name;
+            $("#match span").html(recs + " have matched you with " + my_match_name + "!");
+          });
+        } else {
+            $("#match span").html(recs + " have matched you with " + my_match_name + "!");
+        }
+
+
         ///////////////////////////
 
 
