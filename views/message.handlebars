@@ -120,7 +120,7 @@ function statusChangeCallback(response) {
 var fb_instance;
 var fb_instance_stream;
 var ready = 0;
-var username;
+
 var my_color;
 var fb_instance_top;
 
@@ -242,31 +242,25 @@ function connect_to_chat_firebase(){
       display_msg(id, snapshot.val(), "conversation");
     });
 
-    fb_instance_stream.on("child_changed", function(snapshot, prevChildName){
-      var ratingString = snapshot.val().r;
-      var isNeg = false;
-      if (ratingString.charAt(0) == '-') {
-        ratingString = ratingString.substring(1);
-        var isNeg = true;
-      }
-      console.log("ratingString is: " + ratingString);
-      var indexOfHyphen = ratingString.indexOf("-");
-      var id = ratingString.substring(indexOfHyphen);
-      console.log("id in child changed function is: " + id);
-      var rating = ratingString.substring(0, indexOfHyphen);
-      console.log("rating for this id is: " + rating);
-      if (isNeg === true) rating = "-" + rating;
-      document.getElementById(id).innerHTML = rating;
-    });
+    // fb_instance_stream.on("child_changed", function(snapshot, prevChildName){
+    //   var ratingString = snapshot.val().r;
+    //   var isNeg = false;
+    //   if (ratingString.charAt(0) == '-') {
+    //     ratingString = ratingString.substring(1);
+    //     var isNeg = true;
+    //   }
+    //   console.log("ratingString is: " + ratingString);
+    //   var indexOfHyphen = ratingString.indexOf("-");
+    //   var id = ratingString.substring(indexOfHyphen);
+    //   console.log("id in child changed function is: " + id);
+    //   var rating = ratingString.substring(0, indexOfHyphen);
+    //   console.log("rating for this id is: " + rating);
+    //   if (isNeg === true) rating = "-" + rating;
+    //   document.getElementById(id).innerHTML = rating;
+    // });
 
-    /*fb_instance_top.on("child_added", function(snapshot){
-        get_top_rated();
-      });*/
 
-      fb_instance_top.on("child_changed", function(snapshot){
-        get_top_rated();
-      });
-
+    // block until username is answered
 
     fb_instance_users.push({ name: username,c: my_color});
 
@@ -279,7 +273,7 @@ function connect_to_chat_firebase(){
         $(this).val("");
       }
       });
-    get_top_rated();
+
     };
 
 function connect_webcam() {
@@ -414,137 +408,21 @@ function display_msg(id, data, divId){
     //document.getElementById("conversation").appendChild(stopButton);
 
 
-    var yeahButton = document.createElement("button");
-    var booButton = document.createElement("button");
-    var rating = document.createElement("div");
-
-
-     /*yeahButton.setAttribute("float", "left");
-     booButton.setAttribute("float", "left");
-     rating.setAttribute("float", "left");*/
-
-     yeahButton.setAttribute("id", "yea" + id);
-     booButton.setAttribute("id", "boo" + id);
-     rating.setAttribute("id", id);
-     rating.setAttribute("class", "video_info");
-
-     yeahButton.innerHTML = "YEAH!";
-     booButton.innerHTML = "BOO!";
-     //rating.innerHTML = 0;
-     var ratingStr = data.r;
-     console.log("ratingStr " + ratingStr);
-     if (ratingStr === 0) {
-        rating.innerHTML = 0;
-     } else {
-        var isNeg = false;
-       if (ratingStr.charAt(0) === '-') {
-          var isNeg = true;
-          ratingStr = ratingStr.substring(1);
-       }
-       var indexOfHyphen = ratingStr.indexOf("-");
-       var ratingNum = ratingStr.substring(0, indexOfHyphen);
-
-       if (isNeg === true) ratingNum = "-" + ratingNum;
-       rating.innerHTML = ratingNum;
-     }
-     document.cookie = "voted"+id+"=false";
-
-     yeahButton.onclick = function() {
-        var currID = yeahButton.id.substring(3);
-        var cookieName = "voted" + currID + "=";
-        var cookies = document.cookie.split(';');
-        var cookieValue = "";
-        for (var i = 0; i < cookies.length; i++) {
-          var currCookie = cookies[i].trim();
-          if (currCookie.indexOf(cookieName) == 0) {
-            var cookieValue = currCookie.substring(cookieName.length, currCookie.length);
-          }
-        }
-
-        if (cookieValue === "false" || cookieValue === "down") {
-          var incrementVal = 1;
-          if (cookieValue === "down") incrementVal = 2;
-          var ratingElement = document.getElementById(currID);
-          var rating = parseInt(ratingElement.innerHTML);
-          var newRating = rating + incrementVal;
-          var ratingString = newRating.toString() + currID;
-          fb_instance_stream.child(currID).update({r: ratingString});
-          fb_instance_stream.child(currID).setPriority(newRating*-1);
-          ratingElement.innerHTML = (rating + incrementVal).toString();
-          document.cookie = cookieName + "up";
-      }
-
-     }
-
-     booButton.onclick = function() {
-        var currID = booButton.id.substring(3);
-        var cookieName = "voted" + currID + "=";
-        var cookies = document.cookie.split(';');
-        var cookieValue = "";
-        for (var i = 0; i < cookies.length; i++) {
-          var currCookie = cookies[i].trim();
-          if (currCookie.indexOf(cookieName) == 0) {
-            var cookieValue = currCookie.substring(cookieName.length, currCookie.length);
-          }
-        }
-
-        if (cookieValue === "false" || cookieValue === "up") {
-          var incrementVal = 1;
-          if (cookieValue === "up") incrementVal = 2;
-          var ratingElement = document.getElementById(currID);
-          var rating = parseInt(ratingElement.innerHTML);
-          var newRating = rating - incrementVal;
-          var ratingString = newRating.toString() + currID;
-          fb_instance_stream.child(currID).update({r: ratingString});
-          fb_instance_stream.child(currID).setPriority(newRating*-1);
-          ratingElement.innerHTML = (rating - incrementVal).toString();
-          document.cookie = cookieName + "down";
-        }
-     }
-     
-     /*document.getElementById("conversation").appendChild(yeahButton);
-     document.getElementById("conversation").appendChild(booButton);
-     document.getElementById("conversation").appendChild(rating);*/
-
-     /*buttonsDiv.appendChild(yeahButton);
-     buttonsDiv.appendChild(rating);
-     buttonsDiv.appendChild(booButton);
-     div.appendChild(buttonsDiv);*/
+   
 
     var rightVideoDiv = document.createElement("div");
     rightVideoDiv.setAttribute("float", "right");
     rightVideoDiv.setAttribute("width", "50px");
     rightVideoDiv.appendChild(playButton);
-    rightVideoDiv.appendChild(yeahButton);
-    rightVideoDiv.appendChild(booButton);
-    rightVideoDiv.appendChild(rating);
+    rightVideoDiv.appendChild(stopButton);
+
     div.appendChild(rightVideoDiv);
    $("#"+divId).append(div);
 
   }
 }
 
-function get_top_rated(){
-  $("#top").html("");
-  var topData;
-  var arr = [];
-  fb_instance_top.once('value', function(snapshot){
-    topData = snapshot.val();
-    console.log(topData);
-    for (var i in topData) {
-      arr.push(topData[i]);
-    }
-    console.log(arr.length + " length");
-    for(var i = 0; i < arr.length; i++){
-      var data = arr[i];
-      var rating = arr[i].r;
-      var indexOfHyphen = rating.indexOf('-');
-      var id = rating.substring(indexOfHyphen);
-      display_msg(id, data, 'top');
-    }
-  });
-  
-}
+
 
 function datauri_to_blob(dataURI,callback) {
   var xhr = new XMLHttpRequest();
