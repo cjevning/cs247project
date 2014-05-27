@@ -193,7 +193,7 @@ $(document).ready(function(){
             approveButton.innerHTML = "Approve";
             //approveButton.setAttribute("id", "approveButton");
             approveButton.onclick = function() {
-              fb_instance_stream.push({m:username, v:videoBase64, a:base64, c: my_color, r: 0, '.priority':0});
+              fb_instance_stream.push({m:username + ":", v:videoBase64, a:base64, c: my_color, r: 0, '.priority':0});
               $('#videoplaybackdiv').remove();
               $("#recordBtn").show();
             }
@@ -216,21 +216,21 @@ $(document).ready(function(){
 
 function connect_to_chat_firebase(){
     /* Include your Firebase link here!*/
-    fb_instance = new Firebase("https://radiant-fire-2543.firebaseio.com");
+    fb_instance = new Firebase("https://247chat.firebaseio.com");
 
     // generate new chatroom id or use existing id
-    var url_segments = document.location.href.split("/#");
+    /*var url_segments = document.location.href.split("/#");
     if(url_segments[1]){
       fb_chat_room_id = url_segments[1];
     }else{
       fb_chat_room_id = Math.random().toString(36).substring(7);
-    }
+    }*/
     //display_msg({m:"Share this url with your friend to join this chat: "+ document.location.origin+"/#"+fb_chat_room_id,c:"red"});
     //display_msg({m:"Type lol, :), or :( to share a sequence of three short videos. Plan accordingly!",c:"red"})
 
     // set up variables to access firebase data structure
     
-    var fb_new_chat_room = fb_instance.child('chatrooms').child(fb_chat_room_id);
+    var fb_new_chat_room = fb_instance.child('chatrooms').child(match + "/" + user);
     var fb_instance_users = fb_new_chat_room.child('users');
     fb_instance_stream = fb_new_chat_room.child('stream');
     fb_instance_top = fb_instance_stream.startAt(-1).limit(3);
@@ -320,7 +320,7 @@ function record_audio_and_video(){
   }
 
 function display_msg(id, data, divId){
-  //$("#conversation").append("<div class='msg' style='color:"+data.c+"'>"+data.m+"</div>");
+  $("#conversation").append("<div class='msg' style='color:"+data.c+"'>"+data.m+"</div>");
   if(data.v){
     // for video element
     
@@ -389,7 +389,7 @@ function display_msg(id, data, divId){
     usernameDiv.style.paddingLeft="0px";
     usernameDiv.style.paddingRight="0px";
 
-    div.appendChild(usernameDiv);
+    //div.appendChild(usernameDiv);
     div.appendChild(video);
     //div.appendChild(playButton);
 
