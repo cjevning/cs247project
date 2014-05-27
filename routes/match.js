@@ -170,7 +170,6 @@ exports.check = function(req, res) {
 
 exports.seen = function(req, res) {
 	var user = req.params.user;
-	console.log("fucking a");
 	var id = req.params.id;
 	var l = models.Notification.update({"uid": user, "_id": id},{"seen": true}).exec(addToArray);
 	function addToArray(err, results) {
