@@ -62,7 +62,7 @@ function onceClear3(err) {
           match.save(function(err, proj) {
           if(err) console.log(err);
           console.log("done3");
-          var not = new models.Notification({"uid": "10152423734788293", "type": "match", "seen": false})
+          var not = new models.Notification({"uid": "10152423734788293", "type": "message", "seen": false, "from": "33333333"})
           not.save(function(err, proj) {
             if(err) console.log(err);
             console.log("done4");

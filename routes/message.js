@@ -78,3 +78,17 @@ exports.goodorder = function(req,res)
 		}
 	}
 }
+
+exports.notify = function(req, res) {
+	var newNot = new models.Notification({
+		"uid": req.params.to,
+		"type": "message",
+		"seen": false,
+		"from": req.params.from
+	});
+	newNot.save(aS);
+	function aS(err, re) {
+		if(err) { console.log(err); res.send(500); }
+		res.send();
+	}
+}
