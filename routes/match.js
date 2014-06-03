@@ -48,6 +48,7 @@ exports.good = function(req, res) {
 							"uid": uid1,
 							"type": "match",
 							"seen": false,
+							"from": uid2,
 						});
 						newNot.save(aSave);
 						function aSave(err, resul) {
@@ -56,6 +57,7 @@ exports.good = function(req, res) {
 								"uid": uid2,
 								"type": "match",
 								"seen": false,
+								"from": uid1,
 							});
 							newNot2.save(aS);
 							function aS(err, re) {
@@ -92,14 +94,16 @@ exports.good = function(req, res) {
 									"uid": uid1,
 									"type": "match",
 									"seen": false,
+									"from": uid2,
 								});
 								newNot.save(aSave);
 								function aSave(err, resul) {
 									if(err) { console.log(err); res.send(500); }
-									var newNot = new models.Notification({
+									var newNot2 = new models.Notification({
 										"uid": uid2,
 										"type": "match",
 										"seen": false,
+										"from": uid1
 									});
 									newNot2.save(aS);
 									function aS(err, re) {
@@ -162,7 +166,7 @@ exports.check = function(req, res) {
 	function addToArray(err, results) {
 		if(err) { console.log(err); res.send(500); }
 		if (results[0]) {
-			res.json({"notifications": true, "id": results[0]._id});
+			res.json({"notifications": true, "id": results[0]._id, "type": results[0].type});
 		}
 		else res.json({"notifications": false});
 	}

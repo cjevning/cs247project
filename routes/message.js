@@ -4,7 +4,6 @@ exports.message = function(req,res)
 {
 	var user = req.params.user;
 	var match = req.params.match;
-	var l = models.Notification.find({"uid": user}).remove();
 	var b = models.Match.find({"uid1": user, "uid2": match}).exec(addToArray);
 	function addToArray(err, results) {
 		var len = results.length;
@@ -45,6 +44,7 @@ exports.allMessages = function(req,res)
 	var id = req.params.id;
 	console.log(id);
 	var all = [];
+	var q = models.Notification.find({"uid": user}).remove();
 	var l = models.Match.find({"uid1": id, "numRecs": {"$gte": 5}}).exec(addToArray);
 	function addToArray(err, results) {
 		var len = results.length;
@@ -76,5 +76,19 @@ exports.goodorder = function(req,res)
 		else {
 			res.json({"good": true, "id": match, "user": user});
 		}
+	}
+}
+
+exports.notify = function(req, res) {
+	var newNot = new models.Notification({
+		"uid": req.params.to,
+		"type": "message",
+		"seen": false,
+		"from": req.params.from
+	});
+	newNot.save(aS);
+	function aS(err, re) {
+		if(err) { console.log(err); res.send(500); }
+		res.send();
 	}
 }

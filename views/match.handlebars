@@ -35,6 +35,7 @@ function checkForNotifications() {
 }
 
 function notifyUser(result) {
+  console.log(result);
   if (result['notifications']) {
     id = result['id'];
     var path = window.location.pathname;
@@ -42,15 +43,17 @@ function notifyUser(result) {
     var loggedIn = splits[1];
     var url_call = "/match/notificationSeen/" + loggedIn + "/" + id;
     $.post(url_call);
-    notify();
+    var type = result['type'];
+    notify(type);
   }
 }
 
-function notify () {
+function notify (type) {
   var not = document.getElementById("notification");
   not.style.display = 'inline-block';
   var text = document.getElementById("messagesText");
-  text.innerHTML = "You have a new match!";
+  var change = "You have a new " + type + "!";
+  text.innerHTML = change;
 }
 
 function statusChangeCallback(response) {

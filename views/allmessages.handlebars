@@ -15,9 +15,16 @@
   <script src='https://cdn.firebase.com/js/client/1.0.6/firebase.js'></script>
 </head>
 <body>
-  
+  <div class="switch"></div>
   <script>
   var username;
+
+  function goBack(){
+    var path = window.location.pathname;
+    var splits = path.split("/");
+    var loggedIn = splits[splits.length-1];
+    window.location.href = "/match/user=" + loggedIn;
+  }
   function statusChangeCallback(response) {
     //console.log('statusChangeCallback');
     //console.log(response);
@@ -106,6 +113,7 @@
     }
   }
   </script>
+  <button type="button" onclick="goBack();"> Back </button>
   <h2 class="centertext">Your Matches!!</h2>
   <div id="matchList" class="ourhidden">
   {{#each matches}}
