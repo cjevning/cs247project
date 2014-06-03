@@ -227,6 +227,31 @@ td {
     text-align: center;
 }
 
+.myButton2 {
+    position: absolute;
+    height: 60px;
+    width: 100px;
+    left:10px;
+    top: 10px;
+    font-size: 2em;
+    text-align: center;
+}
+
+.messageBody {
+    font-weight: bold;
+    color: white;
+}
+
+#match {
+    font-size: 18pt;
+    margin-bottom: 20px;
+}
+
+#conversation {
+    font-size: 14pt;
+}
+
+
 .toMessagesText {
     font-size: 14pt;
     margin-top: -10px;
