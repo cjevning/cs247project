@@ -122,8 +122,8 @@ td {
 }
 
 #vidButtons{
-    top: 130px;
-    right: 120px;
+    top: 155px;
+    right: 405px;
 }
 
 #recordButton{
@@ -132,8 +132,8 @@ td {
 }
 
 #webcam_stream{
-    top: 165px;
-    right: 15px;
+    top: 190px;
+    right: 150px;
 }
 
 #match{
