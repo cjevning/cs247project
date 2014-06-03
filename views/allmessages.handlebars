@@ -15,7 +15,9 @@
   <script src='https://cdn.firebase.com/js/client/1.0.6/firebase.js'></script>
 </head>
 <body>
-  <div class="switch"></div>
+  <div class="switch">
+    <button type="button" id="backbutton" onclick="goBack();"> Back </button>
+  </div>
   <script>
   var username;
 
@@ -99,26 +101,34 @@
       var obj = {"u1": splits[i]}
       console.log(obj.u1);
       FB.api('/' + obj.u1 + '/', function (response) {
-        var htmlName = document.createElement('p');
-        htmlName.innerHTML = response.name;
-        FB.api('/'+response.id+'/picture?type=large', function (resp) {
-          var img = document.createElement("img");
-          img.src = "" + resp.data.url;
-          img.setAttribute("style", "height: 100px; width: 100px"); 
-          img.className = "visibleimage";
-          document.getElementById(response.id).appendChild(img);
-          document.getElementById(response.id).appendChild(htmlName);
+        FB.api('/'+response.id+'/picture?type=large', function (resp) {  
+          document.getElementById(response.id+"-img").src = "" + resp.data.url;
+          document.getElementById(response.id+"-name").innerHTML=response.name;
         });
       });
     }
   }
   </script>
-  <button type="button" onclick="goBack();"> Back </button>
   <h2 class="centertext">Your Matches!!</h2>
-  <div id="matchList" class="ourhidden">
-  {{#each matches}}
-    <div id="{{match}}" onclick="gotomessage('{{match}}')" class="nothidden matchlink">
+  <div class="matchListContainer">
+    <div id="matchList" class="ourhidden">
+    {{#each matches}}
+      |{{match}}|
+      {{/each}}
     </div>
+    <table class="table table-striped">  
+      {{#each matches}}
+      <tr id="{{match}}" onclick="gotomessage('{{match}}')" class="nothidden matchlink">
+        <td id ="{{match}}-picture"><img id="{{match}}-img" class="matchImage" src=""></img></td>
+        <td id ="{{match}}-name"></td>
+        <td id ="{{match}}-heart"><i id="{{match}}-hearticon"></i></td>
+      </tr>
+      {{/each}}
+    </table>
+  
+    <!-- <div id="{{match}}" onclick="gotomessage('{{match}}')" class="nothidden matchlink">
+
+    </div> -->
 
   <script type="text/javascript">
     function gotomessage(id) {
@@ -143,16 +153,21 @@
       window.location.href = url;
     }
   </script>  
-  |{{match}}|
   
-{{/each}}
-</div>
+  
+
 <div id="messageList" class="ourhidden">
   {{#each messages}}
      
   |{{from}}|
-  
+  <script>
+    console.log("HERE IT IS:" + '{{from}}' + "!");
+    if (document.getElementById('{{from}}') != null) {
+      document.getElementById('{{from}}-hearticon').setAttribute("class", "fa fa-heart-o")
+    }
+  </script>
 {{/each}}
-
+  </div>
+</div>
 </body>
 </html>
