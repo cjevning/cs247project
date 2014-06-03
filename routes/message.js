@@ -51,24 +51,25 @@ exports.allMessages = function(req,res)
 		for (var i = 0; i < len; i++) {
 			newMessages.push({"from": re[i].from});
 		}
-		var b = models.Notification.find({"uid": id}).remove();
+		var b = models.Notification.find({"uid": id}).remove().exec();
+		var l = models.Match.find({"uid1": id, "numRecs": {"$gte": 5}}).exec(addToArray);
+		function addToArray(err, results) {
+			var len = results.length;
+			for (var i = 0; i < len; i++) {
+				all.push({"user": id, "match": results[i].uid2});
+			}
+			var k = models.Match.find({"uid2": id, "numRecs": {"$gte": 5}}).exec(addToArray2);
+			function addToArray2(err, resu) {
+				var leng = resu.length;
+				for (var j = 0; j < leng; j++) {
+					all.push({"user": id, "match": resu[j].uid1});
+				}
+				res.render('allmessages', {'matches': all, 'messages': newMessages});
+			}
+		}
 	}
 	
-	var l = models.Match.find({"uid1": id, "numRecs": {"$gte": 5}}).exec(addToArray);
-	function addToArray(err, results) {
-		var len = results.length;
-		for (var i = 0; i < len; i++) {
-			all.push({"user": id, "match": results[i].uid2});
-		}
-		var k = models.Match.find({"uid2": id, "numRecs": {"$gte": 5}}).exec(addToArray2);
-		function addToArray2(err, resu) {
-			var leng = resu.length;
-			for (var j = 0; j < leng; j++) {
-				all.push({"user": id, "match": resu[j].uid1});
-			}
-			res.render('allmessages', {'matches': all, 'messages': newMessages});
-		}
-	}
+	
 }
 
 exports.goodorder = function(req,res)

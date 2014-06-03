@@ -212,7 +212,7 @@ $(document).ready(function(){
             //approveButton.setAttribute("id", "approveButton");
             approveButton.onclick = function() {
               fb_instance_stream.push({m:username + ":", v:videoBase64, a:base64, c: my_color, r: 0, '.priority':0});
-              var url = "/message/notify/" + currentUserID + "/" + otherUserID;
+              var url = "/message/notify/" + otherUserID + "/" + currentUserID;
               $.post(url);
               $('#videoplaybackdiv').remove();
               $("#recordButton").show();
@@ -260,7 +260,7 @@ function connect_to_chat_firebase(){
       text = $(this).val();
       if (event.which == 13) {
         fb_instance_stream.push({m:username+": " +text, c: my_color});
-        var url = "/message/notify/" + currentUserID + "/" + otherUserID;
+        var url = "/message/notify/" + otherUserID + "/" + currentUserID;
         $.post(url);
         $(this).val("");
       }
