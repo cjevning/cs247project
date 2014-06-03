@@ -124,6 +124,7 @@ td {
 #vidButtons{
     top: 130px;
     right: 120px;
+    padding-bottom: 10px;
 }
 
 #recordButton{
@@ -145,9 +146,9 @@ td {
 }
 
 #darkness{
-    width: 100vw;
-    height: 100vh;
-    position: absolute;
+    width: 100%;
+    height: 100%;
+    position: fixed;
     background-color: black;
     z-index: 900;
     opacity: .8;
