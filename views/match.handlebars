@@ -142,11 +142,7 @@ function statusChangeCallback(response) {
         } else {
           femaleFriends.push(friendList[i]);        
         }
-        FB.api('/'+friendList[i].id+'/picture?type=square', function (my_response) {
-          var img = document.createElement("img");
-          img.src = "" + my_response.data.url;
-          document.getElementById("FriendArray").appendChild(img);
-        });
+
       }
       for (var i = 0; i < maleFriends.length; i++) {
         for (var j = 0; j < femaleFriends.length; j++) {
@@ -274,6 +270,9 @@ function statusChangeCallback(response) {
 </button>
 -->
 
+<button type="button" id="switchScreen" class="btn btn-default btn-lg" onclick="toMessagePage()">
+  <span> <i class="fa fa-envelope-o fa-5x"></i></span>
+</button>
 
 <button type="button" class="btn btn-default btn-lg" onclick="goodMatch()">
   <span> <i class="fa fa-thumbs-o-up fa-5x"></i></span>
@@ -282,8 +281,7 @@ function statusChangeCallback(response) {
 
 </div>
 <br/>
-<p>Friends using SetEmUp:</p>
-<div id="FriendArray"></div>
+
 <div id="matchesSeen" class="hidden">
   {{#each seen}}
     {{uid1}},{{uid2}}
