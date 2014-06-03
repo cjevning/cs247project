@@ -249,6 +249,7 @@ function connect_to_chat_firebase(){
     fb_instance_stream.on("child_added",function(snapshot){
       var id = snapshot.name();
       display_msg(id, snapshot.val(), "conversation");
+      $("html, body").animate({scrollTop: $(document).height()}, 1000);
     });
 
 
@@ -260,6 +261,7 @@ function connect_to_chat_firebase(){
       text = $(this).val();
       if (event.which == 13) {
         fb_instance_stream.push({m:username+": " +text, c: my_color});
+
         var url = "/message/notify/" + otherUserID + "/" + currentUserID;
         $.post(url);
         $(this).val("");
