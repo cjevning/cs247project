@@ -12,13 +12,41 @@ hr {
 
 .switch {
 	width: 100%;
-	height: 120px;
-	background-color: #5882FA;
+	height: 80px;
+	background-color: #A60000;
 	text-align: center;
+    color: white;
 }
 
 .ourhidden {
     visibility: hidden;
+}
+
+h1 {
+    margin: 0px;
+}
+
+#messagesText {
+    font-size: 58pt;
+    font-family: "Brush Script MT", cursive;
+    color: white;
+    display: inline-block;
+    margin: 0 auto;
+}
+
+.displayMatch img {
+    width: 20vw;
+    height: 20vw;
+    margin-left: 15vw;
+    margin-right: 15vw;
+    margin-top: 1vw;
+}
+
+.names {
+    font-size: 30pt;
+    width: 100%;
+    font-family: "Goudy Old Style", Garamond, "Big Caslon", "Times New Roman", serif;
+    font-weight: bold;
 }
 
 .nothidden {
@@ -41,4 +69,85 @@ hr {
 
 .visibleimage {
     visibility: visible;
+}
+
+.floatright {
+    float: right;
+}
+
+.floatleft {
+    float: left;
+}
+
+.namesDiv {
+    margin: 0px;
+    display: inline-block;
+    width: 49.2vw;
+    text-align: center;
+}
+
+.faOverride {
+    font-size: 13em;
+}
+
+.buttonSpacer {
+    display: inline-block;
+    padding-left: 2vw;
+    padding-right: 2vw;
+}
+
+.outerButtonDiv {
+    text-align: center;
+}
+
+.hidden0{
+    height: 0px;
+}
+
+.inline {
+    
+}
+
+.myButton {
+    position: absolute;
+    height: 60px;
+    width: 100px;
+    right:10px;
+    top: 10px;
+    font-size: 2em;
+    text-align: center;
+}
+
+
+
+.toMessagesText {
+    font-size: 14pt;
+    margin-top: -10px;
+    font-family: "Goudy Old Style", Garamond, "Big Caslon", "Times New Roman", serif;
+    font-weight: bold;
+}
+
+body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: #ff6440;
+    color: white;
+}
+
+.fa-thumbs-o-up {
+    color: #14D100;
+}
+
+.fa-thumbs-o-down {
+    color: #FF4040;
+}
+
+.fa-heart-o {
+    color: red;
+}
+
+.notifyText {
+    width: 90%;
+    font-size: 12pt;
 }
