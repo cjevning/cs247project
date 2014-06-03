@@ -222,6 +222,20 @@ td {
     text-align: center;
 }
 
+.messageBody {
+    font-weight: bold;
+    color: white;
+}
+
+#match {
+    font-size: 18pt;
+    margin-bottom: 20px;
+}
+
+#conversation {
+    font-size: 14pt;
+}
+
 
 .toMessagesText {
     font-size: 14pt;

@@ -14,7 +14,7 @@
   <script src='https://cdn.firebase.com/js/client/1.0.6/firebase.js'></script>
 
 </head>
-<body>
+<body class="messageBody">
 	<div id="switchScreen" class="switch" >
     <button type="button" id="notification" class="btn btn-danger floatright inline myButton2" onclick="goBack()">
   <span> <i class="fa fa-hand-o-left faMyButton"></i></span>
@@ -243,7 +243,7 @@ function connect_to_chat_firebase(){
     var fb_instance_users = fb_new_chat_room.child('users');
     fb_instance_stream = fb_new_chat_room.child('stream');
     fb_instance_top = fb_instance_stream.startAt(-1).limit(3);
-    my_color = "#"+((1<<24)*Math.random()|0).toString(16);
+    my_color = "white";
 
 
     fb_instance_stream.on("child_added",function(snapshot){
