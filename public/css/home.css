@@ -10,6 +10,20 @@ hr {
      background-color: #333;
 }
 
+.pauseButtons{
+    visibility: hidden;
+    margin-left: -45px;
+}
+
+.playButtons{
+    margin-left: 90px;
+}
+
+#stopButton{
+    visibility: hidden;
+    margin-left: 40px;
+}
+
 .switch {
 	width: 100%;
 	height: 80px;
@@ -104,20 +118,21 @@ td {
 
 .myVid {
     position: fixed;
-
+    text-align: center;
 }
 
 #vidButtons{
-    top: 100px;
-    right: 100px;
+    top: 115px;
+    right: 160px;
 }
 
 #recordButton{
-    margin-right: 30px;
+    margin-right: -100px;
+    visibility: hidden;
 }
 
 #webcam_stream{
-    top: 135px;
+    top: 150px;
     right: 15px;
 }
 
@@ -130,8 +145,8 @@ td {
 }
 
 #darkness{
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
     position: absolute;
     background-color: black;
     z-index: 900;

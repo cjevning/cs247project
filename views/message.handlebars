@@ -149,15 +149,16 @@ function GetUrlValue(VarSearch){
 $(document).ready(function(){
     connect_to_chat_firebase();
     connect_webcam();
+
     document.getElementById("recordButton").onclick=function() {
       if (ready == 2) {
         record_audio_and_video();
       }
-      $("#recordButton").hide();
-      $("#stopButton").show();
+      $("#recordButton").css("visibility", "hidden");
+      $("#stopButton").css("visibility", "visible");
     };
     $("#stopButton").click(function() {
-      $("#stopButton").hide();
+      $("#stopButton").css("visibility", "hidden");
       var videoBase64;
       var savedVideoURL;
       recordRTC_Video.stopRecording(function(videoURL) {
@@ -207,7 +208,7 @@ $(document).ready(function(){
               var url = "/message/notify/" + currentUserID + "/" + otherUserID;
               $.post(url);
               $('#videoplaybackdiv').remove();
-              $("#recordButton").show();
+              $("#recordButton").css("visibility", "visible");
               $("#darkness").css("visibility", "hidden");
             }
             $('#videoplaybackdiv').append(approveButton);
@@ -216,7 +217,7 @@ $(document).ready(function(){
             rejectButton.innerHTML = "Reject";
             rejectButton.onclick = function() {
               $('#videoplaybackdiv').remove();
-              $("#recordButton").show();
+              $("#recordButton").css("visibility", "visible");
               $("#darkness").css("visibility", "hidden");
             }
             $('#videoplaybackdiv').append(rejectButton);
@@ -289,10 +290,11 @@ function connect_webcam() {
   });
   video.play();
   webcam_stream.appendChild(video);
-
+$("#recordButton").css("visibility", "visible");
   },function(failure){
     console.log(failure);
   });
+  
 }
 
 function record_audio_and_video(){
@@ -321,25 +323,19 @@ function display_msg(id, data, divId){
 
     video.appendChild(source);
 
-    // for gif instead, use this code below and change mediaRecorder.mimeType in onMediaSuccess below
-    //var video = document.createElement("img");
-     //video.src = URL.createObjectURL(base64_to_blob(data.v));
-
-     //document.getElementById("conversation").appendChild(video);
-
-    
-
     var playButton = document.createElement("button");
     var stopButton = document.createElement("button");
     playButton.setAttribute("id", "play" + id);
     stopButton.setAttribute("id", "stop" + id);
+    stopButton.setAttribute("class", "pauseButtons");
+    playButton.setAttribute("class", "playButtons");
     playButton.innerHTML = "Play";
     stopButton.innerHTML = "Pause";
 
     playButton.onclick = function() {
       var currID = playButton.id.substring(4);
-      /*document.getElementById("video" + currID).play();
-      document.getElementById("audio" + currID).play(); */
+      $("#stop" + id).css("visibility", "visible");
+      $("#play" + id).css("visibility", "hidden");
       setTimeout(function(){
         document.getElementById("video" + currID).play();
         setTimeout(function(){
@@ -350,14 +346,10 @@ function display_msg(id, data, divId){
 
     stopButton.onclick = function() {
       var currID = stopButton.id.substring(4);
+            $("#play" + id).css("visibility", "visible");
+            $("#stop" + id).css("visibility", "hidden");
       document.getElementById("video" + currID).pause();
       document.getElementById("audio" + currID).pause(); 
-      /*setTimeout(function() {
-        document.getElementById("video" + currID).pause();
-        setTimeout(function(){
-          document.getElementById("audio" + currID).pause(); // delay 500 seconds for audio, it worked well on my machine
-        },500);
-      },500);*/
     }
 
     var div = document.createElement("div");
@@ -370,7 +362,6 @@ function display_msg(id, data, divId){
       $("#"+divId).append("<audio id='audio" + id + "' src='"+audioSrc+"'></audio>");
     }
 
-
     var rightVideoDiv = document.createElement("div");
     rightVideoDiv.setAttribute("float", "right");
     rightVideoDiv.setAttribute("width", "50px");
@@ -382,8 +373,6 @@ function display_msg(id, data, divId){
 
   }
 }
-
-
 
 function datauri_to_blob(dataURI,callback) {
   var xhr = new XMLHttpRequest();
@@ -439,18 +428,9 @@ function send() {
 }
 
 
-
-// $(window).scroll(function(){
-//     $("#fullConvo").css("top",Math.max(0,250-$(this).scrollTop()));
-// });
-
-
 </script>
   
  
-
-
-  
   <div class="myVid" id="vidButtons">
     <button id="recordButton">Record</button>
     <button id="stopButton">Stop</button>
