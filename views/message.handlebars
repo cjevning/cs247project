@@ -16,7 +16,7 @@
 </head>
 <body>
 	<div class="switch"></div>
-
+ <div id="darkness"></div>
 
 <script>
   var username;
@@ -148,11 +148,11 @@ function GetUrlValue(VarSearch){
 $(document).ready(function(){
     connect_to_chat_firebase();
     connect_webcam();
-    document.getElementById("recordBtn").onclick=function() {
+    document.getElementById("recordButton").onclick=function() {
       if (ready == 2) {
         record_audio_and_video();
       }
-      $("#recordBtn").hide();
+      $("#recordButton").hide();
       $("#stopButton").show();
     };
     $("#stopButton").click(function() {
@@ -177,6 +177,12 @@ $(document).ready(function(){
             $('body').append(approvalDiv);
             $('#videoplaybackdiv').append("<video id='videoplayback' src='"+savedVideoURL+"'></video>");
             $('#videoplaybackdiv').append("<audio id='audioplayback' src='"+audioURL+"'></audio>");
+
+            var buttonDiv = document.createElement("div");
+            buttonDiv.setAttribute("id", "playbackButtons");
+
+
+            $('#videoplaybackdiv').append(buttonDiv);
             var approvalPlayButton = document.createElement("button");
             approvalPlayButton.setAttribute("id", "approval_play");
             approvalPlayButton.innerHTML = "Play";
@@ -200,7 +206,8 @@ $(document).ready(function(){
               var url = "/message/notify/" + currentUserID + "/" + otherUserID;
               $.post(url);
               $('#videoplaybackdiv').remove();
-              $("#recordBtn").show();
+              $("#recordButton").show();
+              $("#darkness").css("visibility", "hidden");
             }
             $('#videoplaybackdiv').append(approveButton);
 
@@ -208,11 +215,11 @@ $(document).ready(function(){
             rejectButton.innerHTML = "Reject";
             rejectButton.onclick = function() {
               $('#videoplaybackdiv').remove();
-              $("#recordBtn").show();
+              $("#recordButton").show();
+              $("#darkness").css("visibility", "hidden");
             }
             $('#videoplaybackdiv').append(rejectButton);
-            //add to onclick for accept
-            //fb_instance_stream.push({m:username, v:videoBase64, a:base64, c: my_color, r: 0});
+            $("#darkness").css("visibility", "visible");
           });
         });
       });
@@ -222,18 +229,6 @@ $(document).ready(function(){
 function connect_to_chat_firebase(){
     /* Include your Firebase link here!*/
     fb_instance = new Firebase("https://247chat.firebaseio.com");
-
-    // generate new chatroom id or use existing id
-    /*var url_segments = document.location.href.split("/#");
-    if(url_segments[1]){
-      fb_chat_room_id = url_segments[1];
-    }else{
-      fb_chat_room_id = Math.random().toString(36).substring(7);
-    }*/
-    //display_msg({m:"Share this url with your friend to join this chat: "+ document.location.origin+"/#"+fb_chat_room_id,c:"red"});
-    //display_msg({m:"Type lol, :), or :( to share a sequence of three short videos. Plan accordingly!",c:"red"})
-
-    // set up variables to access firebase data structure
     
     var fb_new_chat_room = fb_instance.child('chatrooms').child(match + "/" + user);
     var fb_instance_users = fb_new_chat_room.child('users');
@@ -241,35 +236,12 @@ function connect_to_chat_firebase(){
     fb_instance_top = fb_instance_stream.startAt(-1).limit(3);
     my_color = "#"+((1<<24)*Math.random()|0).toString(16);
 
-    // listen to events
-   /* fb_instance_users.on("child_added",function(snapshot){
-      var id = snapshot.name();
-      display_msg(id, {m:snapshot.val().name+" joined the room",c: snapshot.val().c});
-    }); */
+
     fb_instance_stream.on("child_added",function(snapshot){
       var id = snapshot.name();
       display_msg(id, snapshot.val(), "conversation");
     });
 
-    // fb_instance_stream.on("child_changed", function(snapshot, prevChildName){
-    //   var ratingString = snapshot.val().r;
-    //   var isNeg = false;
-    //   if (ratingString.charAt(0) == '-') {
-    //     ratingString = ratingString.substring(1);
-    //     var isNeg = true;
-    //   }
-    //   console.log("ratingString is: " + ratingString);
-    //   var indexOfHyphen = ratingString.indexOf("-");
-    //   var id = ratingString.substring(indexOfHyphen);
-    //   console.log("id in child changed function is: " + id);
-    //   var rating = ratingString.substring(0, indexOfHyphen);
-    //   console.log("rating for this id is: " + rating);
-    //   if (isNeg === true) rating = "-" + rating;
-    //   document.getElementById(id).innerHTML = rating;
-    // });
-
-
-    // block until username is answered
 
     fb_instance_users.push({ name: username,c: my_color});
 
@@ -311,7 +283,8 @@ function connect_webcam() {
   // adds these properties to the video
   video = mergeProps(video, {
     controls: false,
-    src: URL.createObjectURL(mediaStream)
+    src: URL.createObjectURL(mediaStream),
+    width: 300
   });
   video.play();
   webcam_stream.appendChild(video);
@@ -388,25 +361,7 @@ function display_msg(id, data, divId){
 
     var div = document.createElement("div");
 
-    var usernameDiv = document.createElement("div");
-    usernameDiv.style.color = "white";
-    usernameDiv.innerHTML = data.m;
-    usernameDiv.setAttribute("class", "video_info")
-    usernameDiv.setAttribute("width", "240");
-    usernameDiv.style.paddingLeft="0px";
-    usernameDiv.style.paddingRight="0px";
-
-    //div.appendChild(usernameDiv);
     div.appendChild(video);
-    //div.appendChild(playButton);
-
-    /*var buttonsTable = document.createElement("table");
-    buttonsTable.setAttribute("width", "240");
-    var playRow = document.createElement("tr");
-    var playCell = document.createElement("td");
-    playCell.appendChild(playButton);
-    playRow.appendChild(playCell);
-    buttonsTable.appendChild(playRow);*/
 
     if (data.a) {
       var audioSrc = URL.createObjectURL(base64_to_blob(data.a));
@@ -414,12 +369,6 @@ function display_msg(id, data, divId){
       $("#"+divId).append("<audio id='audio" + id + "' src='"+audioSrc+"'></audio>");
     }
 
-
-    //document.getElementById("conversation").appendChild(playButton);
-    //document.getElementById("conversation").appendChild(stopButton);
-
-
-   
 
     var rightVideoDiv = document.createElement("div");
     rightVideoDiv.setAttribute("float", "right");
@@ -469,12 +418,6 @@ var base64_to_blob = function(base64) {
   return blob;
 };
 
-// window.setInterval(function() {
-//     updatePlay();
-//   }, 5000);
-
-
-
 
 function updatePlay(result) {
   var iframe = document.getElementById('iframe');
@@ -482,10 +425,6 @@ function updatePlay(result) {
 };
 
 
-
-
-
-        //////////////////////////
      });
     });
     
@@ -500,44 +439,33 @@ function send() {
 
 
 
-
+// $(window).scroll(function(){
+//     $("#fullConvo").css("top",Math.max(0,250-$(this).scrollTop()));
+// });
 
 
 </script>
-<!--
- <form name="myform">
- -->
-  <div>
-    <h2 id="match">Congratulations! <span></span></h2>
-  </div>
-<!--
-	<div>
-		<textarea name="conversation" rows="15" cols="50" readonly>Start messaging now!
-		</textarea>
-    <div>
-		  <textarea name="addText" rows="2" cols="50"> </textarea>
-    </div>
-    <div>
-      <button type="button" onclick="goBack();"> Back </button>
-		  <input type="button" value="Send" onClick="send();">
-    </div>
-	</div>
-</form> -->
-
-<!-- <div><h4> FireBase One..</h4></div> -->
-  <button type="button" onclick="goBack();"> Back </button>
   
-  <div>
-    <button id="recordBtn">Record</button>
+ 
+
+
+  
+  <div class="myVid" id="vidButtons">
+    <button id="recordButton">Record</button>
     <button id="stopButton">Stop</button>
   </div>
 
+  <div>
+    <p id="match">Congratulations! <span></span></hp>
+  </div>
 
+<div id="fullConvo">
   <div id="conversation"></div>
   <div id="submission">
     <input type="text" placeholder="say something..">
   </div>
-  <div id="webcam_stream"></div>
+</div>
+  <div class="myVid" id="webcam_stream"></div>
   <div id="video_container"></div>
   <div id="recommenders" class="hidden">
     {{recommenders}}
