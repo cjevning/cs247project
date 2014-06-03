@@ -21,6 +21,7 @@
 <script>
   var username;
   var currentUserID;
+  var otherUserID;
 
   function goBack(){
           window.location.href = "/message/all/" + currentUserID;
@@ -103,12 +104,14 @@ function statusChangeCallback(response) {
 
     FB.api('/' + match + '/', function (response) {
       my_match_name = response.name;
+      otherUserID = response.id;
       FB.api('/me/', function (response1) {
         currentUserID = response1.id;
         username = response1.name;
         if(currentUserID == response.id){
           FB.api('/' + user + '/', function (response2) {
             my_match_name = response2.name;
+            otherUserID = response2.id;
             $("#match span").html(recs + " have matched you with " + my_match_name + "!");
           });
         } else {
@@ -194,6 +197,8 @@ $(document).ready(function(){
             //approveButton.setAttribute("id", "approveButton");
             approveButton.onclick = function() {
               fb_instance_stream.push({m:username + ":", v:videoBase64, a:base64, c: my_color, r: 0, '.priority':0});
+              var url = "/message/notify/" + currentUserID + "/" + otherUserID;
+              $.post(url);
               $('#videoplaybackdiv').remove();
               $("#recordBtn").show();
             }
@@ -274,6 +279,8 @@ function connect_to_chat_firebase(){
       text = $(this).val();
       if (event.which == 13) {
         fb_instance_stream.push({m:username+": " +text, c: my_color});
+        var url = "/message/notify/" + currentUserID + "/" + otherUserID;
+        $.post(url);
         $(this).val("");
       }
       });
