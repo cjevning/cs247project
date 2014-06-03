@@ -43,7 +43,7 @@ h1 {
     height: 20vw;
     margin-left: 15vw;
     margin-right: 15vw;
-    margin-top: 1vw;
+    margin-top: 5vw;
 }
 
 .names {
@@ -171,6 +171,7 @@ h1 {
     display: inline-block;
     width: 49.2vw;
     text-align: center;
+    margin-top: 20px;
 }
 
 .faOverride {
