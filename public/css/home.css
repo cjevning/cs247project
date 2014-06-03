@@ -101,6 +101,7 @@ td {
 #messageList {
     height:0px;
 }
+
 .myVid {
     position: fixed;
 
@@ -210,8 +211,6 @@ td {
     font-size: 2em;
     text-align: center;
 }
-
-
 
 .toMessagesText {
     font-size: 14pt;

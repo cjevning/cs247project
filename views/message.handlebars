@@ -15,7 +15,8 @@
 
 </head>
 <body>
-	<div class="switch"></div>
+	<div class="switch">
+    <button type="button" id="backbutton" onclick="goBack();"> Back </button></div>
  <div id="darkness"></div>
 
 <script>
@@ -24,7 +25,7 @@
   var otherUserID;
 
   function goBack(){
-          window.location.href = "/message/all/" + currentUserID;
+    window.location.href = "/message/all/" + currentUserID;
   }
 
 function statusChangeCallback(response) {
