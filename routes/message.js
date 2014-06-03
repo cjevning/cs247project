@@ -44,11 +44,19 @@ exports.allMessages = function(req,res)
 	var id = req.params.id;
 	console.log(id);
 	var all = [];
-	var q = models.Notification.find({"uid": user}).remove();
+	var newMessages = [];
+	var q = models.Notification.find({"uid": id}).exec(addToArray2);
+	function addToArray2(err, re) {
+		var len = re.length;
+		for (var i = 0; i < len; i++) {
+			newMessages.push({"from": re[i].from});
+		}
+		var b = models.Notification.find({"uid": id}).remove();
+	}
+	
 	var l = models.Match.find({"uid1": id, "numRecs": {"$gte": 5}}).exec(addToArray);
 	function addToArray(err, results) {
 		var len = results.length;
-		console.log(len);
 		for (var i = 0; i < len; i++) {
 			all.push({"user": id, "match": results[i].uid2});
 		}
@@ -58,7 +66,7 @@ exports.allMessages = function(req,res)
 			for (var j = 0; j < leng; j++) {
 				all.push({"user": id, "match": resu[j].uid1});
 			}
-			res.render('allmessages', {'matches': all});
+			res.render('allmessages', {'matches': all, 'messages': newMessages});
 		}
 	}
 }
