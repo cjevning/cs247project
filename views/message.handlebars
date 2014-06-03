@@ -195,6 +195,7 @@ $(document).ready(function(){
             $('#videoplaybackdiv').append(buttonDiv);
             var approvalPlayButton = document.createElement("button");
             approvalPlayButton.setAttribute("id", "approval_play");
+            approvalPlayButton.setAttribute("class", "btn btn-danger");
             approvalPlayButton.innerHTML = "Play";
 
             approvalPlayButton.onclick = function() {
@@ -209,6 +210,7 @@ $(document).ready(function(){
             $('#videoplaybackdiv').append(approvalPlayButton);
 
             var approveButton = document.createElement("button");
+            approveButton.setAttribute("class", "btn btn-danger");
             approveButton.innerHTML = "Approve";
             //approveButton.setAttribute("id", "approveButton");
             approveButton.onclick = function() {
@@ -222,6 +224,7 @@ $(document).ready(function(){
             $('#videoplaybackdiv').append(approveButton);
 
             var rejectButton = document.createElement("button");
+            rejectButton.setAttribute("class", "btn btn-danger");
             rejectButton.innerHTML = "Reject";
             rejectButton.onclick = function() {
               $('#videoplaybackdiv').remove();
@@ -337,8 +340,11 @@ function display_msg(id, data, divId){
     var stopButton = document.createElement("button");
     playButton.setAttribute("id", "play" + id);
     stopButton.setAttribute("id", "stop" + id);
-    stopButton.setAttribute("class", "pauseButtons");
-    playButton.setAttribute("class", "playButtons");
+    stopButton.setAttribute("class", "pauseButtons btn btn-danger");
+    playButton.setAttribute("class", "playButtons btn btn-danger");
+    // var kid1 = document.createElement("span");
+    // kid1.setAttribute("class", "fa fa-hand-o-left faMyButton");
+    // playButton.appendChild(kid1);
     playButton.innerHTML = "Play";
     stopButton.innerHTML = "Pause";
 
@@ -442,8 +448,8 @@ function send() {
   
  
   <div class="myVid" id="vidButtons">
-    <button id="recordButton">Record</button>
-    <button id="stopButton">Stop</button>
+    <button id="recordButton" class="btn btn-danger">Record</button>
+    <button id="stopButton" class="btn btn-danger">Stop</button>
   </div>
 
   <div>
