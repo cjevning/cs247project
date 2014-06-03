@@ -299,7 +299,7 @@ function connect_webcam() {
   video = mergeProps(video, {
     controls: false,
     src: URL.createObjectURL(mediaStream),
-    width: 600
+    width: 400
   });
   video.play();
   webcam_stream.appendChild(video);
