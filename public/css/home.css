@@ -12,15 +12,45 @@ hr {
 
 .switch {
 	width: 100%;
-	height: 120px;
-	background-color: yellow;
+	height: 80px;
+	background-color: #A60000;
 	text-align: center;
+
     position: fixed;
-    z-index: 12;
+
+    color: white;
+
 }
 
 .ourhidden {
     visibility: hidden;
+}
+
+h1 {
+    margin: 0px;
+}
+
+#messagesText {
+    font-size: 58pt;
+    font-family: "Brush Script MT", cursive;
+    color: white;
+    display: inline-block;
+    margin: 0 auto;
+}
+
+.displayMatch img {
+    width: 20vw;
+    height: 20vw;
+    margin-left: 15vw;
+    margin-right: 15vw;
+    margin-top: 1vw;
+}
+
+.names {
+    font-size: 30pt;
+    width: 100%;
+    font-family: "Goudy Old Style", Garamond, "Big Caslon", "Times New Roman", serif;
+    font-weight: bold;
 }
 
 .nothidden {
@@ -51,7 +81,7 @@ hr {
 }
 
 #vidButtons{
-    top: 140px;
+    top: 100px;
     right: 100px;
 }
 
@@ -60,15 +90,15 @@ hr {
 }
 
 #webcam_stream{
-    top: 175px;
+    top: 135px;
     right: 15px;
 }
 
 #match{
-    z-index: 11;
+    z-index: -1;
     position: relative;
-    top: 120px;
-    background-color: white;
+    top: 80px;
+    background-color: #ff6440;
 
 }
 
@@ -84,25 +114,108 @@ hr {
 
 #videoplaybackdiv{
     position: fixed;
-    top: 230px;
+    top: 190px;
     right: 40%;
     z-index: 901;
 }
 
 #submission {
     position: fixed;
-    z-index: 12;
-    border-left: solid white 30px;
+
+    border-left: solid #ff6440 30px;
     bottom: 0;
-    border-bottom: solid white 20px;
-    border-top: solid white 20px;
-    border-right: solid white 160px;
+    border-bottom: solid #ff6440 20px;
+    border-top: solid #ff6440 20px;
+    border-right: solid #ff6440 160px;
 
 }
 
 #conversation {
-    z-index: 10;
-    margin-top: 100px;
+    z-index: -2;
+    margin-top: 90px;
     margin-left: 10px;
     margin-bottom: 70px;
 }
+
+.floatright {
+    float: right;
+}
+
+.floatleft {
+    float: left;
+}
+
+.namesDiv {
+    margin: 0px;
+    display: inline-block;
+    width: 49.2vw;
+    text-align: center;
+}
+
+.faOverride {
+    font-size: 13em;
+}
+
+.buttonSpacer {
+    display: inline-block;
+    padding-left: 2vw;
+    padding-right: 2vw;
+}
+
+.outerButtonDiv {
+    text-align: center;
+}
+
+.hidden0{
+    height: 0px;
+}
+
+.inline {
+    
+}
+
+.myButton {
+    position: absolute;
+    height: 60px;
+    width: 100px;
+    right:10px;
+    top: 10px;
+    font-size: 2em;
+    text-align: center;
+}
+
+
+
+.toMessagesText {
+    font-size: 14pt;
+    margin-top: -10px;
+    font-family: "Goudy Old Style", Garamond, "Big Caslon", "Times New Roman", serif;
+    font-weight: bold;
+}
+
+body {
+    width: 100%;
+    height: 100%;
+    /*overflow: hidden;*/
+    background-color: #ff6440;
+    color: white;
+    z-index: 800;
+}
+
+.fa-thumbs-o-up {
+    color: #14D100;
+}
+
+.fa-thumbs-o-down {
+    color: #FF4040;
+}
+
+.fa-heart-o {
+    color: red;
+}
+
+.notifyText {
+    width: 90%;
+    font-size: 12pt;
+}
+

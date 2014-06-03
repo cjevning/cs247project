@@ -50,10 +50,17 @@ function notifyUser(result) {
 
 function notify (type) {
   var not = document.getElementById("notification");
-  not.style.display = 'inline-block';
-  var text = document.getElementById("messagesText");
-  var change = "You have a new " + type + "!";
-  text.innerHTML = change;
+  //not.style.display = 'inline-block';
+  var change = "<p id=\"notifyText\" class=\"notifyText\">New </br>" + type + "!</p>";
+  not.innerHTML = change;
+  setInterval(changeColor, 1500);
+}
+
+function changeColor () {
+  var text = document.getElementById("notifyText");
+  var color = text.style.color;
+  if (color == "white") text.style.color = "black";
+  else text.style.color = "white";
 }
 
 function statusChangeCallback(response) {
@@ -189,14 +196,14 @@ function statusChangeCallback(response) {
       FB.api('/'+uid1+'/picture?type=large', function (my_response) {
         var img = document.createElement("img");
         img.src = "" + my_response.data.url;
-        img.setAttribute("style", "height: 150px; width: 150px"); 
+        //img.setAttribute("style", "height: 150px; width: 150px"); 
         document.getElementById("FBPic1").appendChild(img);
       });
 
       FB.api('/'+uid2+'/picture?type=large', function (my_response) {
         var img = document.createElement("img");
         img.src = "" + my_response.data.url;
-        img.setAttribute("style", "height: 150px; width: 150px"); 
+        //img.setAttribute("style", "height: 150px; width: 150px"); 
         document.getElementById("FBPic2").appendChild(img);
       });
     }
@@ -242,46 +249,53 @@ function statusChangeCallback(response) {
 </script>
 </head>
 <body>
-<div id="switchScreen" class="switch" onclick="toMessagePage()">
-<button type="button" id="notification" class="btn btn-default" onclick="toMessagePage()" style="display:none">
-  <span> <i class="fa fa-smile-o fa-5x"></i></span>
+<div id="switchScreen" class="switch" >
+  <h1 id="messagesText" class="">SetEmUp</h1>
+
+
+</div>
+
+<button type="button" id="notification" class="btn btn-danger floatright inline myButton" onclick="toMessagePage()">
+  <span> <i class="fa fa-heart faMyButton"></i></span>
+  <p id="notificationText" class="toMessagesText">Matches</p>
 </button>
-<p id="messagesText">Switch to Messages</p>
-</div>
-<div style="height:100px, width:500px;"></div>
-<div style="height:500px, width:500px, margin: 30px, display:inline-block;">
-  <div style="float:left;">
-    <div id="FBPic1" style="height:150px"></div>
-    <p id="name1"></p>
+
+
+  <div class="namesDiv floatleft">
+    <div id="FBPic1" class="displayMatch"></div>
+    <p id="name1" class="names"></p>
   </div>
-  <div style="float:right, margin:5px;">
-    <div id="FBPic2" style="height:150px"></div>
-    <p id="name2"></p>
+  <div class="namesDiv floatright">
+    <div id="FBPic2" class="displayMatch"></div>
+    <p id="name2" class="names"></p>
   </div>
-</div>
 
-<p id="id1" style="visibility:hidden"></p>
-<p id="id2" style="visibility:hidden"></p>
+<p id="id1" class="hidden0" style="visibility:hidden"></p>
+<p id="id2" class="hidden0" style="visibility:hidden"></p>
 
 
-<div>
-<button type="button" class="btn btn-default btn-lg" onclick="badMatch()">
-  <span> <i class="fa fa-thumbs-o-down fa-5x"></i></span>
+<div class="outerButtonDiv">
+  <div class="innerButtonDiv">
+    <div class="buttonSpacer">
+  <button id="down" type="button" class="btn btn-danger btn-lg button" onclick="badMatch()">
+  <span> <i class="fa fa-thumbs-o-down faOverride"></i></span>
 </button>
 <!-- <button type="button" class="btn btn-default btn-lg">
   <span> <i class="fa fa-info fa-5x"></i></span>
 </button>
 -->
-
+<!--
 <button type="button" id="switchScreen" class="btn btn-default btn-lg" onclick="toMessagePage()">
   <span> <i class="fa fa-envelope-o fa-5x"></i></span>
 </button>
-
-<button type="button" class="btn btn-default btn-lg" onclick="goodMatch()">
-  <span> <i class="fa fa-thumbs-o-up fa-5x"></i></span>
+-->
+</div>
+<div class="buttonSpacer">
+<button type="button" class="btn btn-danger btn-lg button" onclick="goodMatch()">
+  <span> <i class="fa fa-thumbs-o-up faOverride"></i></span>
 </button>
-
-
+</div>
+</div>
 </div>
 <br/>
 
