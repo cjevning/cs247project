@@ -253,7 +253,10 @@ function connect_to_chat_firebase(){
     fb_instance_stream.on("child_added",function(snapshot){
       var id = snapshot.name();
       display_msg(id, snapshot.val(), "conversation");
-      $("html, body").animate({scrollTop: $(document).height()}, 0);
+      setTimeout(function(){
+        $("html, body").animate({scrollTop: $(document).height()}, 0);
+      }, 500)
+      
     });
 
 
@@ -299,7 +302,7 @@ function connect_webcam() {
   video = mergeProps(video, {
     controls: false,
     src: URL.createObjectURL(mediaStream),
-    width: 600
+    width: 400
   });
   video.play();
   webcam_stream.appendChild(video);
@@ -316,7 +319,7 @@ function record_audio_and_video(){
   }
 
 function display_msg(id, data, divId){
-  $("#conversation").append("<div class='msg' style='color:"+data.c+"'>"+data.m+"</div>");
+  $("#conversation").append("<div class='msg' style='color:"+data.c+"'><p class=\"messageP\">"+data.m+"</p></div>");
   if(data.v){
     // for video element
     
