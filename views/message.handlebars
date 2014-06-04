@@ -253,7 +253,10 @@ function connect_to_chat_firebase(){
     fb_instance_stream.on("child_added",function(snapshot){
       var id = snapshot.name();
       display_msg(id, snapshot.val(), "conversation");
-      $("html, body").animate({scrollTop: $(document).height()}, 0);
+      setTimeout(function(){
+        $("html, body").animate({scrollTop: $(document).height()}, 0);
+      }, 500)
+      
     });
 
 
