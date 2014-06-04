@@ -52,7 +52,7 @@ function onceClear2(err) {
 }
 
 function onceClear3(err) {
-  var match2 = new models.Match({"uid1": "10152423734788293", "uid2": "696436097061985", "recommenders": "Jordan Shelton,Aubriana Menendez,Victoria Smith,Joe Lee,Helena Scutt", "numRecs": 5});
+  var match2 = new models.Match({"uid1": "2415271352488", "uid2": "10152142404973037", "recommenders": "Jordan Shelton,Aubriana Menendez,Victoria Smith,Joe Lee,Helena Scutt", "numRecs": 5});
   match2.save(function(err, proj) {
     var match3 = new models.Match({"uid1": "10152423734788293", "uid2": "637148899698075", "recommenders": "hello,hi,conner,kennan,jordan", "numRecs": 5});
     match3.save(function(err, proj) {
