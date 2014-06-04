@@ -319,7 +319,7 @@ function record_audio_and_video(){
   }
 
 function display_msg(id, data, divId){
-  $("#conversation").append("<div class='msg' style='color:"+data.c+"'>"+data.m+"</div>");
+  $("#conversation").append("<div class='msg' style='color:"+data.c+"'><p class=\"messageP\">"+data.m+"</p></div>");
   if(data.v){
     // for video element
     
