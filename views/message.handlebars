@@ -241,7 +241,7 @@ $(document).ready(function(){
 
 function connect_to_chat_firebase(){
     /* Include your Firebase link here!*/
-    fb_instance = new Firebase("https://247chat.firebaseio.com");
+    fb_instance = new Firebase("https://setemup.firebaseio.com");
     
     var fb_new_chat_room = fb_instance.child('chatrooms').child(match + "/" + user);
     var fb_instance_users = fb_new_chat_room.child('users');
