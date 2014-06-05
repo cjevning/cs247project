@@ -61,7 +61,14 @@ function onceClear3(err) {
 
         var match5 = new models.Match({"uid1": "10152423734788293", "uid2": "10152435644103676", "recommenders": "Kennan Murphy-Sierra,Jovan Lopez,Victoria Smith,Stephen Aman,Helena Scutt", "numRecs": 5});
   match5.save(function(err, proj) {
-          
+
+
+        var match6 = new models.Match({"uid1": "696436097061985", "uid2": "10152435644103676", "recommenders": "Kennan Murphy,John Treat,Victoria Smith,Joe Lee,Helena Scutt", "numRecs": 5});
+  match6.save(function(err, proj) {
+          var match = new models.Match({"uid1": "10152423734788293", "uid2": "696436097061985", "recommenders": "hello,hi,conner,kennan,jordan", "numRecs": 5});
+
+          match.save(function(err, proj) {
+
           if(err) console.log(err);
           console.log("done3");
           var not = new models.Notification({"uid": "10152423734788293", "type": "message", "seen": false, "from": "10152435644103676"})
@@ -73,6 +80,7 @@ function onceClear3(err) {
         
       });
     });
+  });
   });
   });
 }
